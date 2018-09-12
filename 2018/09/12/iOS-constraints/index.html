@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="在检查约束没有其他问题情况下，依然还有其他的冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints in">
+<meta name="description" content="在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints i">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS约束冲突警告解决办法">
 <meta property="og:url" content="http://jemesl.github.io/2018/09/12/iOS-constraints/index.html">
 <meta property="og:site_name" content="JL Blog">
-<meta property="og:description" content="在检查约束没有其他问题情况下，依然还有其他的冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints in">
+<meta property="og:description" content="在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints i">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-12T10:37:30.578Z">
+<meta property="og:updated_time" content="2018-09-12T11:12:29.037Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS约束冲突警告解决办法">
-<meta name="twitter:description" content="在检查约束没有其他问题情况下，依然还有其他的冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints in">
+<meta name="twitter:description" content="在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。通常的原因有2个。 一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条 12345678910111213Probably at least one of the constraints i">
 
 
 
@@ -329,7 +329,7 @@
       
 
       
-        <p>在检查约束没有其他问题情况下，依然还有其他的冲突警告。<br>通常的原因有2个。</p>
+        <p>在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。<br>通常的原因有2个。</p>
 <h3 id="一、cell-中的约束冲突"><a href="#一、cell-中的约束冲突" class="headerlink" title="一、cell 中的约束冲突"></a>一、cell 中的约束冲突</h3><p>在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。<br>Will attempt to recover by breaking constraint 下面那一条</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Probably</span> at least one of the constraints <span class="keyword">in</span> the following list <span class="keyword">is</span> one you don't want. </span><br><span class="line">	<span class="type">Try</span> this: </span><br><span class="line">		(<span class="number">1</span>) look at each constraint and <span class="keyword">try</span> to figure out which you don't expect; </span><br><span class="line">		(<span class="number">2</span>) <span class="built_in">find</span> the code that added the unwanted constraint or constraints and fix it. </span><br><span class="line">(</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a08a0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.left == UIView:0x7fae99d55e70.left&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a0900@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.top == UIView:0x7fae99d55e70.top&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a0960@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.right == UIView:0x7fae99d55e70.right&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a09c0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.bottom == UIView:0x7fae99d55e70.bottom&gt;"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="type">Will</span> attempt to recover by breaking constraint </span><br><span class="line">&lt;<span class="type">SnapKit</span>.<span class="type">LayoutConstraint</span>:<span class="number">0x6040002a0a20</span>@<span class="type">ChoiceArticleCell</span>.swift#<span class="number">183</span> <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.height == <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.width * <span class="number">0.425531923770905</span>&gt;</span><br></pre></td></tr></table></figure>
 <p>解决办法就是：将这条约束的 <strong>优先级降低</strong>。约束默认的优先级是1000。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make.height.equalTo(cover.snp.width).multipliedBy(<span class="number">1</span>/<span class="number">2.35</span>).priority(<span class="number">999</span>)</span><br></pre></td></tr></table></figure></p>
