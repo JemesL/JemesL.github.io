@@ -13,9 +13,9 @@ Will attempt to recover by breaking constraint 下面那一条
 
 ```Swift
 Probably at least one of the constraints in the following list is one you don't want. 
-	Try this: 
-		(1) look at each constraint and try to figure out which you don't expect; 
-		(2) find the code that added the unwanted constraint or constraints and fix it. 
+Try this: 
+    (1) look at each constraint and try to figure out which you don't expect; 
+    (2) find the code that added the unwanted constraint or constraints and fix it. 
 (
     "<SnapKit.LayoutConstraint:0x6040002a08a0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.left == UIView:0x7fae99d55e70.left>",
     "<SnapKit.LayoutConstraint:0x6040002a0900@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.top == UIView:0x7fae99d55e70.top>",
