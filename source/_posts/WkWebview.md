@@ -1,10 +1,10 @@
 ---
-title: WkWebview的使用
+title: WkWebview与其他组件混排
 date: 2018-09-13 15:47:55
 tags:
 ---
 
-根据项目需求，需要webview和自定义的组件根据 API 返回数据动态混排。
+根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。
 并且需要针对css以及图片懒加载优化。
 
 ### 一、添加css
@@ -28,7 +28,7 @@ let htmlContent = """
 其中由于显示问题，需要在头部添加 **meta** 这一段。
 由于css比较多，放在一起不太合适。可以写在另一个文件中，通过 **Bundle** 形式加载。
 这里有个需要注意的地方，css文件存放的位置。
-此刻RichStyle.css 存放在Classes/Utils/ 下。
+此刻RichStyle.css 存放在/Classes/Utils/ 下。
 要在加载html 时，指定在 **file:///Classes/Utils/** 目录下。
 ```Swift
 webView.loadHTMLString(htmlContent, baseURL: URL(string: "file:///Classes/Utils/") )
@@ -41,12 +41,14 @@ webView.loadHTMLString(htmlContent, baseURL: URL(string: "file:///Classes/Utils/
 webview 视窗高度根据内容高度来的。导致 **lazysizes**依旧还是在加载同时把所有页面图片加载完，不过加载图片是在 **didFinish**之后。
 
 目前的解决办法就是：
+* 拿到数据后对其中img标签作调整，将src 的值替换到 data-src中，这样没有src 则图片不会加载。或者给src设置一个占位图片的值也可以，并设置好大小。
 * 在scrollview 中针对滚动代理方法优化，让页面停止下来时才开始触发加载图片的方法。
 * 触发的方法 会让scrollview中 所有的webview 调用 判断是否加载图片的js脚本。并且会传入当前scrollview的contentOffset 和 webview的frame.minY
 * js脚本拿到当前webview 当中所有的imgs，遍历每一个img，并根据img的topoff 和webview 的偏移参数计算这个img 是否是在scrollview的视窗内。
 * 然后判断修改img的src 加载图片。
+* 还有点就是要刷新webview的高度, 可以在加载图片后 js 调swift 刷新高度，或者弄个定时器执行js脚本刷新高度
 
-##### 一、
+##### 一、停止滚动触发监测加载图片的方法
 ```Swift
 func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
     if !decelerate {
@@ -71,7 +73,7 @@ func scrollViewDidEndScroll() {
     }
 }
 ```
-#####  二、
+#####  二、执行每个webview的JS脚本
 
 ```Swift
 func loadImgsScript(offset: CGFloat, wkTop: CGFloat) {
@@ -92,7 +94,7 @@ func loadImgsScript(offset: CGFloat, wkTop: CGFloat) {
                 }
                 if(isDisplay){
                     img.src = img.getAttribute('data-src');
-                    img.setAttribute('class','lazyloaded bmy-tag bmy-tag_img');
+                    img.setAttribute('class','lazyloaded');
                 }
             }
         }
@@ -101,6 +103,23 @@ func loadImgsScript(offset: CGFloat, wkTop: CGFloat) {
     webView.evaluateJavaScript(script) { (res, error) in
         if let e = error {
             print(error)
+        }
+    }
+}
+```
+
+### 刷新webview 的高度
+```Swift
+@objc func reloadWebviewHeight() {
+    webView.evaluateJavaScript("document.body.scrollHeight") { (value, error) in
+        guard let safeValue = value else { return }
+        let height = CGFloat(safeValue as! CGFloat)
+
+        if height > self.contentHeight {
+            self.contentHeight = height
+            self.webView.snp.updateConstraints({ (make) in
+                make.height.equalTo(height)
+            })
         }
     }
 }
