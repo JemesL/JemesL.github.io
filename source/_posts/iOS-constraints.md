@@ -35,7 +35,9 @@ make.height.equalTo(cover.snp.width).multipliedBy(1/2.35).priority(999)
 ### 二、普通view里面 会出现 约束冲突
 这种情况 通常是view的 **translatesAutoresizingMaskIntoConstraints**属性 导致
 将其改为 false 可以解决问题
-
+针对 view
+如果使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 false
+如果不使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 true
 ```Swift
 self.translatesAutoresizingMaskIntoConstraints = false
 
