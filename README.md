@@ -10,5 +10,6 @@ hexo new filename // 新建文章
 然后 生成相关静态文件和部署
 hexo g // 生成静态文件 
 hexo d // 部署到远程master
+hexo s // 本地预览
 
 部署会强制更新远程master ，在master分支不需要git push
