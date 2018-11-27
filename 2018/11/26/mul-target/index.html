@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        runloop｜undefined
+        多 Target 来进行 版本or环境 区分｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/20/runloop/">
+    <link rel="canonical" href="http://jemesl.github.io/2018/11/26/mul-target/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,12 +137,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>runloop</h1>
+                    <h1>多 Target 来进行 版本or环境 区分</h1>
                     
                     <span class="meta">
                          作者 Jemesl Wu
                         <span>
-                          日期 2018-09-20
+                          日期 2018-11-26
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -154,7 +154,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            runloop
+            多 Target 来进行 版本or环境 区分
         </span>
     </div>
 </header>
@@ -165,8 +165,21 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="runloop相关的应用"><a href="#runloop相关的应用" class="headerlink" title="runloop相关的应用"></a>runloop相关的应用</h3><h4 id="滑动列表的优化"><a href="#滑动列表的优化" class="headerlink" title="滑动列表的优化"></a>滑动列表的优化</h4><p>cell中设置图片 会卡顿以下，可以吧设置image的代码放置在runloop default 的mode里运行。<br>避免滑动的过程中去触发设置image的动作。</p>
-<h4 id="app-Crash-的优化"><a href="#app-Crash-的优化" class="headerlink" title="app Crash 的优化"></a>app Crash 的优化</h4><p>crash后 可以重新唤醒一个app 做一些提示性的文字 发送报错邮件等</p>
+                <p>有时候项目对于环境的切换或者是同一套代码不同的app的切换，每次手动改代码很不方便，而且容易出错。<br>xcode 可以添加 Target 来非常方便的进行切换</p>
+<h3 id="添加-Target-步骤"><a href="#添加-Target-步骤" class="headerlink" title="添加 Target 步骤"></a>添加 Target 步骤</h3><ul>
+<li>在项目设置页面，在 TARGETS 下列表中，选择需要复制的target 右键，选Duplicate，再选 Duplicate only</li>
+<li>然后Targets 下会新增一个 <strong>‘xxx copy’</strong> 的target，选中后 单击可改名</li>
+<li>并且会多了一个  <strong>‘xxx copy-info.plist’</strong> 文件</li>
+<li>可以点击target 配置不通的app name、bundleID、icon 等等其他相关配置</li>
+</ul>
+<h3 id="Target-区分配置"><a href="#Target-区分配置" class="headerlink" title="Target 区分配置"></a>Target 区分配置</h3><ul>
+<li><p>在对应的 target 的 buildsetting 下找到 Preprocessor Macros, 该选择下面有个值 Debug 和 Release。在其中 Debug or Release 里面添加 某个参数=1，例如：在DEBUG 里面 添加 DEBUG=1。那么在scheme里面设置 build configuration 设置为 debug时，DEBUG 的值即为true，这个也可以用来切换线上线下环境</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">if</span> <span class="type">DEBUG</span></span><br><span class="line"><span class="comment">// 测试环境</span></span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="comment">// 线上环境</span></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在buildsetting 下的Other Swift flags 下也可添加标识符 ，在debug 和release 下添加即为true。<br>例如 如果在新target下的 debug下添加 -DDEBUG， 则DEBUG为true，debug release均添加 -DNEW，则不论debug还是release模式下， NEW均为true，这样就可以区分不同的target的配置一些</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#<span class="keyword">if</span> <span class="type">NEW</span></span><br><span class="line"><span class="comment">// NEW target</span></span><br><span class="line">#<span class="keyword">else</span></span><br><span class="line"><span class="comment">// 非 NEW target</span></span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
                 <hr>
                 
@@ -174,14 +187,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2018/11/24/ui-layout/" data-toggle="tooltip" data-placement="top"
-                           title="iOS页面动态布局的一些小技巧">&larr; Previous Post</a>
+                        <a href="/2018/11/27/runscript/" data-toggle="tooltip" data-placement="top"
+                           title="Xcode 添加 script 自动更新 Build">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2018/09/14/rxswift/" data-toggle="tooltip" data-placement="top"
-                           title="rxswift 的学习记录">Next Post &rarr;</a>
+                        <a href="/2018/11/24/ui-layout/" data-toggle="tooltip" data-placement="top"
+                           title="iOS页面动态布局的一些小技巧">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -200,7 +213,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#runloop相关的应用"><span class="toc-text">runloop相关的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#滑动列表的优化"><span class="toc-text">滑动列表的优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app-Crash-的优化"><span class="toc-text">app Crash 的优化</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#添加-Target-步骤"><span class="toc-text">添加 Target 步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Target-区分配置"><span class="toc-text">Target 区分配置</span></a></li></ol>
                 </div>
             </div>
         </div>

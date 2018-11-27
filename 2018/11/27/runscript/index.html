@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        runloop｜undefined
+        Xcode 添加 script 自动更新 Build｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/20/runloop/">
+    <link rel="canonical" href="http://jemesl.github.io/2018/11/27/runscript/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,12 +137,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>runloop</h1>
+                    <h1>Xcode 添加 script 自动更新 Build</h1>
                     
                     <span class="meta">
                          作者 Jemesl Wu
                         <span>
-                          日期 2018-09-20
+                          日期 2018-11-27
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -154,7 +154,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            runloop
+            Xcode 添加 script 自动更新 Build
         </span>
     </div>
 </header>
@@ -165,23 +165,20 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="runloop相关的应用"><a href="#runloop相关的应用" class="headerlink" title="runloop相关的应用"></a>runloop相关的应用</h3><h4 id="滑动列表的优化"><a href="#滑动列表的优化" class="headerlink" title="滑动列表的优化"></a>滑动列表的优化</h4><p>cell中设置图片 会卡顿以下，可以吧设置image的代码放置在runloop default 的mode里运行。<br>避免滑动的过程中去触发设置image的动作。</p>
-<h4 id="app-Crash-的优化"><a href="#app-Crash-的优化" class="headerlink" title="app Crash 的优化"></a>app Crash 的优化</h4><p>crash后 可以重新唤醒一个app 做一些提示性的文字 发送报错邮件等</p>
+                <p>每次打包经常会遇到忘记修改 bulid 导致上传失败，又不得不重新打包上传，极其浪费时间。<br>xcode 的 Build Phases 的run script 可以添加脚本，来自动更新build的值</p>
+<p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git=`sh /etc/profile; <span class="built_in">which</span> git`</span><br><span class="line">appBuild=`<span class="string">"<span class="variable">$git</span>"</span> rev-list --all |wc -l`</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$CONFIGURATION</span> = <span class="string">"Debug"</span> ]; <span class="keyword">then</span></span><br><span class="line">branchName=`<span class="string">"<span class="variable">$git</span>"</span> rev-parse --abbrev-ref HEAD`</span><br><span class="line">branchShort=`<span class="string">"<span class="variable">$git</span>"</span> rev-parse --abbrev-short HEAD`</span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :BranchName <span class="variable">$branchName</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :BranchShort <span class="variable">$branchShort</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :APPBuildNum <span class="variable">$appBuild</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion <span class="variable">$appBuild</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Updated <span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p>其中  <strong>BranchName</strong>、<strong>BranchShort</strong>、<strong>APPBuildNum</strong>、<strong>CFBundleVersion</strong>，前三个需要在info.plist 新增字段<br>也可以根据需求自定义其他字段。<br>这里根据 debug 和 release 做了区分。<br>DEBUG： 可以拿到 分支名字、 分支commitID、build次数<br>RELEASE：可以拿到build 次数</p>
+<p>ps：目前，在多target版本还有点问题，在最初的target里没有问题，但是在copy出来的其他target暂时无法运行</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2018/11/24/ui-layout/" data-toggle="tooltip" data-placement="top"
-                           title="iOS页面动态布局的一些小技巧">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2018/09/14/rxswift/" data-toggle="tooltip" data-placement="top"
-                           title="rxswift 的学习记录">Next Post &rarr;</a>
+                        <a href="/2018/11/26/mul-target/" data-toggle="tooltip" data-placement="top"
+                           title="多 Target 来进行 版本or环境 区分">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -200,7 +197,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#runloop相关的应用"><span class="toc-text">runloop相关的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#滑动列表的优化"><span class="toc-text">滑动列表的优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app-Crash-的优化"><span class="toc-text">app Crash 的优化</span></a></li></ol></li></ol>
+                    
                 </div>
             </div>
         </div>

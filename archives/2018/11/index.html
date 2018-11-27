@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        runloop｜undefined
+        
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/20/runloop/">
+    <link rel="canonical" href="http://jemesl.github.io/archives/2018/11/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -116,119 +116,158 @@
 
 <!-- Main Content -->
 
-<!--only post-->
 
-
-<img class="wechat-title-img"
-     src="">
-
-
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>runloop</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2018-09-20
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
+<!-- Page Header -->
+<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
+    <div class="row">
+        <header class="intro-header">
+            <div class="container">
+                <div class="site-heading text-center">
+                    <div class="about-me">
+                        <!--移动端头部显示-->
+                        <img src=""/>
+                        <h5><a href="/about/">Jemesl Wu</a></h5>
+                        <p></p>
                     </div>
                 </div>
             </div>
+        </header>
+    </div>
+</div>
+<!-- Main Content -->
+<div class="container custom-haojen-container">
+    <!-- Post Container -->
+    <div class="row">
+        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
+            <!-- Main Content -->
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
+    <a href="/2018/11/27/runscript/">
+        <h2 class="post-title">
+            Xcode 添加 script 自动更新 Build
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-27
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                每次打包经常会遇到忘记修改 bulid 导致上传失败，又不得不重新打包上传，极其浪费时间。xcode 的 Build Phases 的run script 可以添加脚本，来自动更新build的值
+代码如下：12345678910111213git=`sh /etc/profile; which ..
+            </p>
         </div>
-    </div>
-    <div class="post-title-haojen">
-        <span>
-            runloop
-        </span>
-    </div>
-</header>
+    </a>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="runloop相关的应用"><a href="#runloop相关的应用" class="headerlink" title="runloop相关的应用"></a>runloop相关的应用</h3><h4 id="滑动列表的优化"><a href="#滑动列表的优化" class="headerlink" title="滑动列表的优化"></a>滑动列表的优化</h4><p>cell中设置图片 会卡顿以下，可以吧设置image的代码放置在runloop default 的mode里运行。<br>避免滑动的过程中去触发设置image的动作。</p>
-<h4 id="app-Crash-的优化"><a href="#app-Crash-的优化" class="headerlink" title="app Crash 的优化"></a>app Crash 的优化</h4><p>crash后 可以重新唤醒一个app 做一些提示性的文字 发送报错邮件等</p>
+</div>
 
-                <hr>
-                
+<hr>
 
-                <ul class="pager">
+
+
+<div class="post-preview "
+     style="background-image: url('')">
+    <a href="/2018/11/26/mul-target/">
+        <h2 class="post-title">
+            多 Target 来进行 版本or环境 区分
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-26
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                有时候项目对于环境的切换或者是同一套代码不同的app的切换，每次手动改代码很不方便，而且容易出错。xcode 可以添加 Target 来非常方便的进行切换
+添加 Target 步骤
+在项目设置页面，在 TARGETS 下列表中，选择需要复制的target 右键，选Duplicate，再选 Dup..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
+    <a href="/2018/11/24/ui-layout/">
+        <h2 class="post-title">
+            iOS页面动态布局的一些小技巧
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-24
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                之前的项目用了的RXSwift 和 RxCocoa，现在结合RxCocoa 做一些动态布局的优化。
+一、实现类似H5的流式布局如果了解H5的应该都知道它的流式布局非常方便，不需要考虑上下元素的关系。iOS的布局其实类似H5的绝对布局，但每每要写清楚上下元素之间的关系，而且每当页面有元素增删的时候..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+
+<!-- 翻页 pager -->
+
+<ul class="pager">
+    
+    
+</ul>
+
+
+        </div>
+        <!-- Sidebar Container -->
+        <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+
+            <!-- About Me -->
+            <section class="visible-md visible-lg" style="padding: 0 18px">
+                <div class="short-about">
+                    <!--侧边栏头像-->
                     
-                    <li class="previous">
-                        <a href="/2018/11/24/ui-layout/" data-toggle="tooltip" data-placement="top"
-                           title="iOS页面动态布局的一些小技巧">&larr; Previous Post</a>
-                    </li>
+                    <h5><a href="/about/">Jemesl Wu</a></h5>
                     
-                    
-                    <li class="next">
-                        <a href="/2018/09/14/rxswift/" data-toggle="tooltip" data-placement="top"
-                           title="rxswift 的学习记录">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
+                    <hr>
+                    <!-- SNS Link 社交 -->
+                    <ul class="list-inline">
+                        
+                        
+                        
 
-                
+                        
 
-                
+                        
 
+                        
 
-                <!--加入新的评论系统-->
-                
-
-                
-
-            </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#runloop相关的应用"><span class="toc-text">runloop相关的应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#滑动列表的优化"><span class="toc-text">滑动列表的优化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#app-Crash-的优化"><span class="toc-text">app Crash 的优化</span></a></li></ol></li></ol>
+                        
+                    </ul>
                 </div>
-            </div>
+            </section>
+
+            <!-- Featured Tags  标签 -->
+            
+
+            
+
         </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
     </div>
-</article>
-
-
-
-
-
-
+</div>
 
 <!-- Footer -->
 <!-- Footer -->
