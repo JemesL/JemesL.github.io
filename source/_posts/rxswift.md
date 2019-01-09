@@ -113,7 +113,13 @@ second sub
 2018-12-24 15:07:29.656: second -> Event completed
 2018-12-24 15:07:29.656: second -> isDisposed
 ```
-#### 4. **Subjects**
+
+#### 4. **Single**
+Single 是 Observable 的另外一个版本。但它不像 Observable 可以发出多个元素，它要么只能发出一个元素，要么产生一个 error 事件。
+* 发出一个元素，或一个 error 事件
+* 不会共享状态变化
+
+#### 5. **Subjects**
 subjects 即是 Observer，也是 Observable。它可以动态接受新的值，然后通过 Event 将新值发送给所有的订阅者
 
 subjects 一共有四种：PublishSubject、BehaviorSubject、ReplaySubject、Variable
@@ -158,13 +164,13 @@ sub second
 * 是对 BehaviorSubject 的一层包装
 * 和 BehaviorSubject 不同的是不能用 .error or .complete 来结束
 
-#### 5. **drive**
+#### 6. **drive**
 如果我们的序列满足如下特征，就可以使用它：
 * 不会产生 error 事件
 * 一定在主线程监听（MainScheduler）
 * 共享状态变化（shareReplayLatestWhileConnected）
 
-#### 6. **flatMap**
+#### 7. **flatMap**
 * flatMap 会对每一个元素应用一个转换方法，转换成一个 Observable，等于是变成一个Observables的序列，然后再对Observables的元素合并之后再发出来，等于又将其降维成一个Observable
 * 这个用处很大，如果一个Observable 的元素同样也是一个Observable时，利用flatMap可以将其元素都发送出来。
 ```Swift
@@ -183,14 +189,14 @@ subject2.onNext("2")
 subject1.onNext("C")
 ```
 
-#### 7. **ControlProperty**
+#### 8. **ControlProperty**
 ControlProperty 是专门用来描述UI控件属性，拥有该类型的属性都是被观察者Observable
 有一下特征：
 * 不会产生error 事件
 * 一定在 MainScheduler 订阅
 * 一定在 MainScheduler 监听
 
-#### 8. **ControlEvent**
+#### 9. **ControlEvent**
 ControlEvent 是专门用来描述UI所产生的事件，拥有该类型的属性都是被观察者Observable有一下特征：
 * 不会产生error 事件
 * 一定在 MainScheduler 订阅
