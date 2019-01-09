@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/archives/2018/11/">
+    <link rel="canonical" href="http://jemesl.github.io/page/2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -44,7 +44,7 @@
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
-" data-ishome = "false" >
+" data-ishome = "true" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -117,6 +117,126 @@
 <!-- Main Content -->
 
 
+<style>
+
+    .custom-haojen-container .post-preview:nth-of-type(1),
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
+        text-align: center;
+        background-repeat: no-repeat;
+        border-radius: 3px;
+        background-size: cover;
+        padding: 0;
+        height: 300px;
+        display: table;
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.16);
+    }
+
+    /*去掉诗歌的背景图片*/
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) {
+        background-image: none !important;
+        background-color: rgba(255, 248, 220, 0.5);
+    }
+
+    .custom-haojen-container .post-preview:nth-child(1) h2,
+    .custom-haojen-container .post-preview:nth-child(1) .post-meta,
+    .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+        text-shadow: 0 0 40px rgba(0, 0, 0, 1);
+        letter-spacing: 1px;
+        color: #fff;
+        margin-top: 0;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    .custom-haojen-container .post-preview:nth-child(1) .post-meta {
+        font-size: .9em;
+        font-weight: 300;
+        margin-top: 0;
+    }
+
+    .custom-haojen-container .post-preview-poetry:nth-child(1) .post-subtitle {
+        letter-spacing: 6px;
+        font-size: 18px;
+        font-family: unset;
+        font-weight: 400;
+        color: rgba(0, 0, 0, .75)
+    }
+
+    /*不显示摘要*/
+    .custom-haojen-container .post-preview:nth-child(1) .post-content-preview {
+        display: none
+    }
+
+    /*只第一个显示背景图片*/
+    .custom-haojen-container .post-preview:not(:nth-child(1)) {
+        background-image: none !important;
+    }
+
+    /*第一个分界线去掉*/
+    .custom-haojen-container hr:nth-of-type(1) {
+        display: none;
+    }
+
+    /*主题*/
+    .custom-haojen-container .post-preview:nth-of-type(1) > a {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    /*诗词标题*/
+    .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+        font-size: 35px;
+        font-family: STKaiti;
+        color: rgba(0, 0, 0, .8);
+    }
+
+    .custom-haojen-container .post-preview-poetry:nth-of-type(1) .post-meta {
+        color: #0e2231;
+    }
+
+    @media (max-width: 768px) {
+        .custom-haojen-container .post-preview:nth-child(1) {
+            height: 240px;
+        }
+
+        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+            font-size: 28px !important;
+            margin-top: 0;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+            font-size: 18px;
+            font-weight: 400;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .custom-haojen-container .post-preview:nth-of-type(1) > a {
+            padding: 20px
+        }
+    }
+
+    /*手机屏幕*/
+    @media (max-width: 400px) {
+        .custom-haojen-container .post-preview:nth-child(1) {
+            height: 195px;
+        }
+
+        .custom-haojen-container .post-preview-poetry:nth-child(1) h2 {
+            font-size: 20px !important;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) .post-subtitle {
+            font-size: 16px;
+        }
+
+        .custom-haojen-container .post-preview:nth-child(1) a {
+            padding: 30px 20px;
+        }
+    }
+</style>
+
 <!-- Page Header -->
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
     <div class="row">
@@ -145,67 +265,19 @@
 
 <div class="post-preview "
      style="background-image: url('')">
-    <a href="/2018/11/27/runscript/">
+    <a href="/2018/09/12/ios-constraints/">
         <h2 class="post-title">
-            Xcode 添加 script 自动更新 Build
+            iOS约束冲突警告解决办法
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-27
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-09-12
         </p>
         
         <div class="post-content-preview">
             <p>
-                每次打包经常会遇到忘记修改 bulid 导致上传失败，又不得不重新打包上传，极其浪费时间。xcode 的 Build Phases 的run script 可以添加脚本，来自动更新build的值
-代码如下：12345678910111213git=`sh /etc/profile; which ..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/11/26/mul-target/">
-        <h2 class="post-title">
-            多 Target 来进行 版本or环境 区分
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-26
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                有时候项目对于环境的切换或者是同一套代码不同的app的切换，每次手动改代码很不方便，而且容易出错。xcode 可以添加 Target 来非常方便的进行切换
-添加 Target 步骤
-在项目设置页面，在 TARGETS 下列表中，选择需要复制的target 右键，选Duplicate，再选 Dup..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/11/24/ui-layout/">
-        <h2 class="post-title">
-            iOS提高页面书写效率
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                之前的项目用了的RXSwift 和 RxCocoa，现在结合RxCocoa 做一些动态布局的优化。
-一、实现类似H5的流式布局如果了解H5的应该都知道它的流式布局非常方便，不需要考虑上下元素的关系。iOS的布局其实类似H5的绝对布局，但每每要写清楚上下元素之间的关系，而且每当页面有元素增删的时候..
+                在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。通常的原因有2个。
+一、cell 中的约束冲突在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。Will attempt to recover by breaking constraint 下面那一条
+1234567..
             </p>
         </div>
     </a>
@@ -220,6 +292,10 @@
 <!-- 翻页 pager -->
 
 <ul class="pager">
+    
+    <li class="previous">
+        <a href="/">&larr; Newer Posts</a>
+    </li>
     
     
 </ul>
