@@ -265,6 +265,53 @@
 
 <div class="post-preview "
      style="background-image: url('')">
+    <a href="/2019/03/20/date/">
+        <h2 class="post-title">
+            Swift 时间格式处理
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-20
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                1. String -&gt; Date有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效1234567891011121314extension String &#123;    /// String -&gt; Date    ///    /// - Par..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
+    <a href="/2019/03/07/swift-build-optimizing/">
+        <h2 class="post-title">
+            Swift 编译优化
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-07
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                之前每次编译, 需要花费太长时间. 甚至改一行代码也是如此.后面花了一些时间去做优化
+显示编译耗时过长的警告target -&gt; buildsetting -&gt; Other Swift Flags -&gt; Debug添加-Onone-Xfrontend-warn-long-func..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
     <a href="/2019/01/09/arc/">
         <h2 class="post-title">
             一个比较少见的循环引用
@@ -452,60 +499,6 @@ app Crash 的优化crash后 可以重新唤醒一个app 做一些提示性的文
             <p>
                 最近新的项目采用了rxswift + mvvm 来写。网络框架用的moya 的rxswift版。
 总的体验来说，mvvm架构中，确定体会到了把数据逻辑剥离出来并且方便复用的便利。采用了响应式编程理念，用了rxswift。在某些场景下，rxswift 的体验非常好.不过现在也造成了在问题追踪上会比..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/09/13/wkwebview/">
-        <h2 class="post-title">
-            WkWebview与其他组件混排
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-09-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。并且需要针对css以及图片懒加载优化。
-一、添加css这一点比较简单，webview所显示的内容是通过接口返回获得的字符串。做一个简单的拼接就可以。
-12345678910let link = "&lt;link ..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/09/13/wkwebview-js/">
-        <h2 class="post-title">
-            WkWebview 与 js 交互
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-09-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                最近由于项目的原因，需要wkwebview 与 js 频繁的交互主要有以下两种
-
-Content-Blocking Rules
-调用wkwebview 的js执行脚本的方法
-JS 调用 swift
-
-一、Content-Blocking Rules如果是iOS11 之后的并且需求简单 wkweb..
             </p>
         </div>
     </a>
