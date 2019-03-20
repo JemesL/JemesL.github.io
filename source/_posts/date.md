@@ -111,3 +111,5 @@ class TimeTool {
     }
 }
 ```
+
+[Date Format Patterns支持的格式](http://www.unicode.org/reports/tr35/tr35-25.html#Date_Format_Patterns)
