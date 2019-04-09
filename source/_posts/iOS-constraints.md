@@ -42,3 +42,6 @@ make.height.equalTo(cover.snp.width).multipliedBy(1/2.35).priority(999)
 self.translatesAutoresizingMaskIntoConstraints = false
 
 ```
+
+在 tableview 的 header or footerview 使用约束的 view
+该 view 的 translatesAutoresizingMaskIntoConstraints 属性需要设置为 true
