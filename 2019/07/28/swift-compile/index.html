@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        
+        Swift 编译优化｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/archives/2019/">
+    <link rel="canonical" href="http://jemesl.github.io/2019/07/28/swift-compile/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -43,7 +43,7 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "false" data-istags="false
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
 " data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -116,188 +116,121 @@
 
 <!-- Main Content -->
 
+<!--only post-->
 
-<!-- Page Header -->
-<div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 visible-xs-block visible-sm-block">
-    <div class="row">
-        <header class="intro-header">
-            <div class="container">
-                <div class="site-heading text-center">
-                    <div class="about-me">
-                        <!--移动端头部显示-->
-                        <img src=""/>
-                        <h5><a href="/about/">Jemesl Wu</a></h5>
-                        <p></p>
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Swift 编译优化</h1>
+                    
+                    <span class="meta">
+                         作者 Jemesl Wu
+                        <span>
+                          日期 2019-07-28
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
                     </div>
                 </div>
             </div>
-        </header>
+        </div>
     </div>
-</div>
-<!-- Main Content -->
-<div class="container custom-haojen-container">
-    <!-- Post Container -->
-    <div class="row">
-        <div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container">
-            <!-- Main Content -->
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/07/28/swift-compile/">
-        <h2 class="post-title">
+    <div class="post-title-haojen">
+        <span>
             Swift 编译优化
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-07-28
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                swift 有些语法写起来很便捷, 但是编译效率却很低.当代码量到一定程度, 编译起来, 耗费很多时间.
-###下面总结一些, 部分导致编译效率低下的写法.
+        </span>
+    </div>
+</header>
 
-使用 ?? 来解包, 尤其是在某个表达式里面使用, 越复杂越低效, 低到难以置信
-数组拼接使用 + , 建议使用.append 方法进行..
-            </p>
-        </div>
-    </a>
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>swift 有些语法写起来很便捷, 但是编译效率却很低.<br>当代码量到一定程度, 编译起来, 耗费很多时间.</p>
+<p>###下面总结一些, 部分导致编译效率低下的写法.</p>
+<ol>
+<li>使用 ?? 来解包, 尤其是在某个表达式里面使用, 越复杂越低效, 低到难以置信</li>
+<li>数组拼接使用 + , 建议使用.append 方法进行</li>
+<li>字符串拼接不要使用+, 使用 “(var)”</li>
+<li>对于复杂的变量, 建议声明时写上类型</li>
+<li>对于像if 类似的条件判断里面表达式不要太复杂, 比较复杂的可以先算完在来判断</li>
+</ol>
 
-</div>
+                <hr>
+                
 
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/20/date/">
-        <h2 class="post-title">
-            Swift 时间格式处理
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-20
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1. String -&gt; Date有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效1234567891011121314extension String &#123;    /// String -&gt; Date    ///    /// - Par..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/03/07/swift-build-optimizing/">
-        <h2 class="post-title">
-            Swift 编译优化
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-03-07
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                之前每次编译, 需要花费太长时间. 甚至改一行代码也是如此.后面花了一些时间去做优化
-显示编译耗时过长的警告target -&gt; buildsetting -&gt; Other Swift Flags -&gt; Debug添加-Onone-Xfrontend-warn-long-func..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2019/01/09/arc/">
-        <h2 class="post-title">
-            一个比较少见的循环引用
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-01-09
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                循环引用应该大部分人都知道怎么回事.
-较常见的就有
-A实例 强引用 B实例, B 强引用 A.
-A实例强引用 Block B, B 里面 调用了self
-
-在开发的时候发现另一个类型, 不过有点类似上述的第二个
-123456789101112131415161718192021222324252..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<!-- 翻页 pager -->
-
-<ul class="pager">
-    
-    
-</ul>
-
-
-        </div>
-        <!-- Sidebar Container -->
-        <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
-                sidebar-container
-            ">
-
-            <!-- About Me -->
-            <section class="visible-md visible-lg" style="padding: 0 18px">
-                <div class="short-about">
-                    <!--侧边栏头像-->
+                <ul class="pager">
                     
-                    <h5><a href="/about/">Jemesl Wu</a></h5>
                     
-                    <hr>
-                    <!-- SNS Link 社交 -->
-                    <ul class="list-inline">
-                        
-                        
-                        
+                    <li class="next">
+                        <a href="/2019/03/20/date/" data-toggle="tooltip" data-placement="top"
+                           title="Swift 时间格式处理">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
 
-                        
+                
 
-                        
+                
 
-                        
 
-                        
-                    </ul>
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
                 </div>
-            </section>
-
-            <!-- Featured Tags  标签 -->
-            
-
-            
-
+            </div>
         </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
     </div>
-</div>
+</article>
+
+
+
+
+
+
 
 <!-- Footer -->
 <!-- Footer -->
