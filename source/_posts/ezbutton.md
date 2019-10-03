@@ -9,5 +9,5 @@ tags:
 支持图片文字,上下/左右排布.
 支持居中, 居左, 居上, 居右, 居下等
 
-[Ddemo](https://github.com/JemesL/EZButton)
+[Demo](https://github.com/JemesL/EZButton)
 
