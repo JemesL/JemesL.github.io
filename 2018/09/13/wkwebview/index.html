@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        WkWebview与其他组件混排｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://jemesl.github.io/2018/09/13/wkwebview/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    我心中有猛虎，细嗅蔷薇
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>WkWebview与其他组件混排</h1>
+                    
+                    <span class="meta">
+                         作者 Jemesl Wu
+                        <span>
+                          日期 2018-09-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            WkWebview与其他组件混排
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。<br>并且需要针对css以及图片懒加载优化。</p>
+<h3 id="一、添加css"><a href="#一、添加css" class="headerlink" title="一、添加css"></a>一、添加css</h3><p>这一点比较简单，webview所显示的内容是通过接口返回获得的字符串。<br>做一个简单的拼接就可以。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> link = <span class="string">"&lt;link rel=\"stylesheet\" href=\"<span class="subst">\(String(describing: Bundle.main.url(forResource: "RichStyle", withExtension: "css")</span>!))\"&gt;"</span></span><br><span class="line"><span class="keyword">let</span> htmlContent = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">&lt;header&gt;</span></span><br><span class="line"><span class="string">&lt;meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no' /&gt;</span></span><br><span class="line"><span class="string"><span class="subst">\(link)</span></span></span><br><span class="line"><span class="string">&lt;/header&gt;</span></span><br><span class="line"><span class="string">&lt;div class='richtext-container'&gt;</span></span><br><span class="line"><span class="string"><span class="subst">\(newContent)</span></span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br></pre></td></tr></table></figure>
+<p><strong>newContent</strong> 是内容正文<br><strong>link</strong> 是css样式<br>其中由于显示问题，需要在头部添加 <strong>meta</strong> 这一段。<br>由于css比较多，放在一起不太合适。可以写在另一个文件中，通过 <strong>Bundle</strong> 形式加载。<br>这里有个需要注意的地方，css文件存放的位置。<br>此刻RichStyle.css 存放在/Classes/Utils/ 下。<br>要在加载html 时，指定在 <strong>file:///Classes/Utils/</strong> 目录下。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadHTMLString(htmlContent, baseURL: <span class="type">URL</span>(string: <span class="string">"file:///Classes/Utils/"</span>) )</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、图片懒加载"><a href="#二、图片懒加载" class="headerlink" title="二、图片懒加载"></a>二、图片懒加载</h3><p>如果是单个webview，且视窗大小固定。可以使用 <strong>lazysizes</strong>，纯js原生，不依赖任何其他库。<br><strong>lazysizes</strong> 的逻辑是webview 视窗之外的图片懒加载，滑动到视窗的img 才会加载。<br>但项目中是多个webview 及其他组件 全展开显示在scrollview里面。<br>webview 视窗高度根据内容高度来的。导致 <strong>lazysizes</strong>依旧还是在加载同时把所有页面图片加载完，不过加载图片是在 <strong>didFinish</strong>之后。</p>
+<p>目前的解决办法就是：</p>
+<ul>
+<li>拿到数据后对其中img标签作调整，将src 的值替换到 data-src中，这样没有src 则图片不会加载。或者给src设置一个占位图片的值也可以，并设置好大小。</li>
+<li>在scrollview 中针对滚动代理方法优化，让页面停止下来时才开始触发加载图片的方法。</li>
+<li>触发的方法 会让scrollview中 所有的webview 调用 判断是否加载图片的js脚本。并且会传入当前scrollview的contentOffset 和 webview的frame.minY</li>
+<li>js脚本拿到当前webview 当中所有的imgs，遍历每一个img，并根据img的topoff 和webview 的偏移参数计算这个img 是否是在scrollview的视窗内。</li>
+<li>然后判断修改img的src 加载图片。</li>
+<li>还有点就是要刷新webview的高度, 可以在加载图片后 js 调swift 刷新高度，或者弄个定时器执行js脚本刷新高度</li>
+</ul>
+<h5 id="一、停止滚动触发监测加载图片的方法"><a href="#一、停止滚动触发监测加载图片的方法" class="headerlink" title="一、停止滚动触发监测加载图片的方法"></a>一、停止滚动触发监测加载图片的方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndDragging</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView, willDecelerate decelerate: Bool)</span></span> &#123;</span><br><span class="line">    <span class="keyword">if</span> !decelerate &#123;</span><br><span class="line">        <span class="keyword">let</span> dragTpDragStop = scrollView.isTracking &amp;&amp; !scrollView.isDragging &amp;&amp; !scrollView.isDecelerating</span><br><span class="line">        <span class="keyword">if</span> dragTpDragStop &#123;</span><br><span class="line">            scrollViewDidEndScroll()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndDecelerating</span><span class="params">(<span class="number">_</span> scrollView: UIScrollView)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> scrollToScrollStop = !scrollView.isTracking &amp;&amp; !scrollView.isDragging &amp;&amp; !scrollView.isDecelerating</span><br><span class="line">    <span class="keyword">if</span> scrollToScrollStop &#123;</span><br><span class="line">        scrollViewDidEndScroll()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndScroll</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> scrollOffset = scrollView.contentOffset.y</span><br><span class="line">    <span class="keyword">for</span> rh <span class="keyword">in</span> allRichText.enumerated() &#123;<span class="comment">// rh 是一个包含 webview属性的组件</span></span><br><span class="line">        rh.element.loadImgsScript(offset:scrollOffset, wkTop: rh.element.frame.minY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="二、执行每个webview的JS脚本"><a href="#二、执行每个webview的JS脚本" class="headerlink" title="二、执行每个webview的JS脚本"></a>二、执行每个webview的JS脚本</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadImgsScript</span><span class="params">(offset: CGFloat, wkTop: CGFloat)</span></span> &#123;</span><br><span class="line">    <span class="keyword">let</span> minOffset = offset</span><br><span class="line">    <span class="keyword">let</span> maxOffset = offset + bmy_screenHeight</span><br><span class="line">    <span class="keyword">let</span> script = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">        var imgs = document.getElementsByTagName('img');</span></span><br><span class="line"><span class="string">        var minOffset = <span class="subst">\(minOffset)</span></span></span><br><span class="line"><span class="string">        var maxOffset = <span class="subst">\(maxOffset)</span></span></span><br><span class="line"><span class="string">        var wkTop = <span class="subst">\(wkTop)</span></span></span><br><span class="line"><span class="string">        function lazyload()&#123;</span></span><br><span class="line"><span class="string">            for(var i=0; i&lt;imgs.length; i++) &#123;</span></span><br><span class="line"><span class="string">                var img = imgs[i]</span></span><br><span class="line"><span class="string">                var top = img.offsetTop + wkTop</span></span><br><span class="line"><span class="string">                var isDisplay = false</span></span><br><span class="line"><span class="string">                if((top &gt; minOffset - 300) &amp;&amp; top &lt; maxOffset + 300) &#123;</span></span><br><span class="line"><span class="string">                    isDisplay = true</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                if(isDisplay)&#123;</span></span><br><span class="line"><span class="string">                    img.src = img.getAttribute('data-src');</span></span><br><span class="line"><span class="string">                    img.setAttribute('class','lazyloaded');</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        lazyload()</span></span><br><span class="line"><span class="string">    "</span><span class="string">""</span></span><br><span class="line">    webView.evaluateJavaScript(script) &#123; (res, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> e = error &#123;</span><br><span class="line">            <span class="built_in">print</span>(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="刷新webview-的高度"><a href="#刷新webview-的高度" class="headerlink" title="刷新webview 的高度"></a>刷新webview 的高度</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">reloadWebviewHeight</span><span class="params">()</span></span> &#123;</span><br><span class="line">    webView.evaluateJavaScript(<span class="string">"document.body.scrollHeight"</span>) &#123; (value, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> safeValue = value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">let</span> height = <span class="type">CGFloat</span>(safeValue <span class="keyword">as</span>! <span class="type">CGFloat</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> height &gt; <span class="keyword">self</span>.contentHeight &#123;</span><br><span class="line">            <span class="keyword">self</span>.contentHeight = height</span><br><span class="line">            <span class="keyword">self</span>.webView.snp.updateConstraints(&#123; (make) <span class="keyword">in</span></span><br><span class="line">                make.height.equalTo(height)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/09/14/rxswift/" data-toggle="tooltip" data-placement="top"
+                           title="RXSwift">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/09/13/wkwebview-js/" data-toggle="tooltip" data-placement="top"
+                           title="WkWebview 与 js 交互">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、添加css"><span class="toc-text">一、添加css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、图片懒加载"><span class="toc-text">二、图片懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#一、停止滚动触发监测加载图片的方法"><span class="toc-text">一、停止滚动触发监测加载图片的方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#二、执行每个webview的JS脚本"><span class="toc-text">二、执行每个webview的JS脚本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#刷新webview-的高度"><span class="toc-text">刷新webview 的高度</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>

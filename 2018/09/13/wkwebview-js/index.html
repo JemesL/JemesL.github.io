@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        WkWebview 与 js 交互｜undefined
+        
+    </title>
+
+    <link rel="canonical" href="http://jemesl.github.io/2018/09/13/wkwebview-js/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    我心中有猛虎，细嗅蔷薇
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>WkWebview 与 js 交互</h1>
+                    
+                    <span class="meta">
+                         作者 Jemesl Wu
+                        <span>
+                          日期 2018-09-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            WkWebview 与 js 交互
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>最近由于项目的原因，需要wkwebview 与 js 频繁的交互<br>主要有以下两种</p>
+<ul>
+<li>Content-Blocking Rules</li>
+<li>调用wkwebview 的js执行脚本的方法</li>
+<li>JS 调用 swift</li>
+</ul>
+<h3 id="一、Content-Blocking-Rules"><a href="#一、Content-Blocking-Rules" class="headerlink" title="一、Content-Blocking Rules"></a>一、Content-Blocking Rules</h3><p>如果是iOS11 之后的并且需求简单 wkwebview 提供了一个内容过滤规则的功能。可以简单处理一些操作。这个的好处是webview显示内容之前就可以处理。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> jsonString = <span class="string">""</span><span class="string">"</span></span><br><span class="line"><span class="string">[&#123;</span></span><br><span class="line"><span class="string">    "</span>trigger<span class="string">":&#123;</span></span><br><span class="line"><span class="string">        "</span>url-<span class="built_in">filter</span><span class="string">": "</span>.*<span class="string">",</span></span><br><span class="line"><span class="string">        "</span>resource-type<span class="string">":["</span>document<span class="string">"]</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    "</span>action<span class="string">":&#123;</span></span><br><span class="line"><span class="string">        "</span>type<span class="string">": "</span>css-display-<span class="keyword">none</span><span class="string">",</span></span><br><span class="line"><span class="string">        "</span>selector<span class="string">": "</span>.js-mp-info<span class="string">"</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;]</span></span><br><span class="line"><span class="string">"</span><span class="string">""</span></span><br><span class="line"><span class="keyword">if</span> #available(iOS <span class="number">11.0</span>, *) &#123;</span><br><span class="line">    <span class="type">WKContentRuleListStore</span>.<span class="keyword">default</span>().compileContentRuleList(forIdentifier: <span class="string">"demoRuleList"</span>, encodedContentRuleList: jsonString) &#123; (list, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> contentRuleList = list <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">let</span> configuration = <span class="keyword">self</span>.webView.configuration</span><br><span class="line">        configuration.userContentController.add(contentRuleList)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> detailUrl = <span class="keyword">self</span>.detailUrl &#123;</span><br><span class="line">            <span class="keyword">self</span>.urlStr = detailUrl</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>url-filter 可以用正则匹配url 是否触发规则过滤<br>resource-type 是适用资源类型</p>
+<ul>
+<li>document</li>
+<li>image</li>
+<li>style-sheet</li>
+<li>script</li>
+<li>font</li>
+<li>raw (Any untyped load, such as XMLHttpRequest)</li>
+<li>svg-document</li>
+<li>media</li>
+<li>popup</li>
+</ul>
+<p>action type 是动作类型</p>
+<ul>
+<li><p>block<br>Tells the browser engine to abort loading the resource. If the resource was cached, the cache is ignored.</p>
+</li>
+<li><p>block-cookies<br>The engine strips all cookies from the header before sending the request to the server. Safari’s own privacy policy takes precedence, so that only cookies that would otherwise be accepted by the privacy policy can be blocked. Combining block-cookies and ignore-previous-rules will not override the browser’s privacy settings.</p>
+</li>
+<li><p>css-display-none<br>Hides elements of the page based on a CSS selector. A second action field, named selector, contains the selector list. Any element matching the selector list has its display property set to none, which hides it.</p>
+</li>
+<li><p>ignore-previous-rules<br>Previously triggered actions are not performed.</p>
+</li>
+<li><p>make-https<br>Changes a URL from http to https before making a server request. URLs with a specified port (other than the default port 80) and links using other protocols are not affected.</p>
+</li>
+</ul>
+<p><a href="https://developer.apple.com/library/archive/documentation/Extensions/Conceptual/ContentBlockingRules/CreatingRules/CreatingRules.html" target="_blank" rel="noopener"><strong>Content-Blocking Rules</strong> Apple官方文档使用说明</a></p>
+<h3 id="二、调用wkwebview-的js执行脚本的方法"><a href="#二、调用wkwebview-的js执行脚本的方法" class="headerlink" title="二、调用wkwebview 的js执行脚本的方法"></a>二、调用wkwebview 的js执行脚本的方法</h3><p>如果版本小于ios11，没有Content-Blocking Rules，或者规则不能满足需求。<br>也可以通过调用 <strong>wk.evaluateJavaScript</strong> 方法, 直接执行js。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str = <span class="string">"$('.js-mp-info').remove();"</span></span><br><span class="line">webView.evaluateJavaScript(str, completionHandler: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure></p>
+<p>JS代码除了直接写成string之外，也可以在另写在文件里，然后读取文件。<br>例如 JS相关代码写在 <strong>LoginJavaScript.js</strong> 文件里<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsHandler = <span class="string">""</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    jsHandler = <span class="keyword">try</span> <span class="type">String</span>(contentsOf: <span class="type">Bundle</span>.main.url(forResource: <span class="string">"LoginJavaScript"</span>, withExtension: <span class="string">"js"</span>)!, encoding: <span class="type">String</span>.<span class="type">Encoding</span>.utf8)</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> wkScript = <span class="type">WKUserScript</span>.<span class="keyword">init</span>(source: jsHandler,</span><br><span class="line">                                  injectionTime: <span class="type">WKUserScriptInjectionTime</span>.atDocumentEnd,</span><br><span class="line">                                  forMainFrameOnly: <span class="literal">true</span>)</span><br><span class="line">config.userContentController.addUserScript(wkScript)</span><br><span class="line"><span class="keyword">let</span> wk = <span class="type">WKWebView</span>.<span class="keyword">init</span>(frame: .zero, configuration: config)</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、JS-调用-swift"><a href="#三、JS-调用-swift" class="headerlink" title="三、JS 调用 swift"></a>三、JS 调用 swift</h3><h4 id="预定义"><a href="#预定义" class="headerlink" title="预定义"></a>预定义</h4><p>wkwebview的 config 可以事先定义一些事件<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> config = <span class="type">WKWebViewConfiguration</span>()</span><br><span class="line">config.userContentController.add(<span class="keyword">self</span>, name: <span class="string">"eventOne"</span>)</span><br><span class="line">config.userContentController.add(<span class="keyword">self</span>, name: <span class="string">"eventTwo"</span>)</span><br></pre></td></tr></table></figure></p>
+<h4 id="JS调用"><a href="#JS调用" class="headerlink" title="JS调用"></a>JS调用</h4><p>然后在JS 脚本里面调用<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webkit.messageHandlers.eventOne.postMessage(message);</span><br></pre></td></tr></table></figure></p>
+<p>其中 <strong>eventOne</strong> 就是之前事先定义好的事件名字。<br><strong>message</strong> 就是 js 向 swift 传递的信息</p>
+<h4 id="Swift-代理方法监听"><a href="#Swift-代理方法监听" class="headerlink" title="Swift 代理方法监听"></a>Swift 代理方法监听</h4><p>实现 <strong>WKScriptMessageHandler</strong> 下的一个代理方法，在方法里面监测到JS触发的预定义的事件<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">userContentController</span><span class="params">(<span class="number">_</span> userContentController: WKUserContentController, didReceive message: WKScriptMessage)</span></span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> message.name &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">"eventOne"</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"eventOne"</span>)</span><br><span class="line">      <span class="built_in">print</span>(message.body)<span class="comment">//js传来的信息</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">"eventTwo"</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"eventTwo"</span>)</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">"none"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/09/13/wkwebview/" data-toggle="tooltip" data-placement="top"
+                           title="WkWebview与其他组件混排">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/09/12/ios-constraints/" data-toggle="tooltip" data-placement="top"
+                           title="iOS约束冲突警告解决办法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Content-Blocking-Rules"><span class="toc-text">一、Content-Blocking Rules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、调用wkwebview-的js执行脚本的方法"><span class="toc-text">二、调用wkwebview 的js执行脚本的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、JS-调用-swift"><span class="toc-text">三、JS 调用 swift</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#预定义"><span class="toc-text">预定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS调用"><span class="toc-text">JS调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Swift-代理方法监听"><span class="toc-text">Swift 代理方法监听</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2019
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="">
+</body>
+
+</html>
