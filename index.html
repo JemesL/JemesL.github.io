@@ -265,9 +265,9 @@
 
 <div class="post-preview "
      style="background-image: url('')">
-    <a href="/2019/10/03/jlstat/">
+    <a href="/2019/10/03/ezbutton/">
         <h2 class="post-title">
-            jlstat
+            自定义Button, 约束布局
         </h2>
         <p class="post-meta">
             <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-03
@@ -275,7 +275,34 @@
         
         <div class="post-content-preview">
             <p>
-                
+                鉴于系统提供的UIButton 用起来非常不方便.自定义了一个EZButton, 内部通过约束布局,.支持图片文字,上下/左右排布.支持居中, 居左, 居上, 居右, 居下等
+Demo
+
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
+    <a href="/2019/10/03/jlstat/">
+        <h2 class="post-title">
+            JLSTAT
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-10-03
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                前面为了方便 给视图添加多状态操作, 是通过继承的方式添加属性来操作的.这样的缺点是不得不为每一个空间都要写一个控件写一个子类.
+后面通过参照rxswift, 来给所有的view 添加多状态操作.
+主要也是先通过给view 添加一个 jl 的命名空间, 然后再通过运行时, 为 view 关联一个..
             </p>
         </div>
     </a>
@@ -476,30 +503,6 @@ A实例强引用 Block B, B 里面 调用了self
                 有时候项目对于环境的切换或者是同一套代码不同的app的切换，每次手动改代码很不方便，而且容易出错。xcode 可以添加 Target 来非常方便的进行切换
 添加 Target 步骤
 在项目设置页面，在 TARGETS 下列表中，选择需要复制的target 右键，选Duplicate，再选 Dup..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/11/24/ui-layout/">
-        <h2 class="post-title">
-            iOS提高页面书写效率
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-24
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                之前的项目用了的RXSwift 和 RxCocoa，现在结合RxCocoa 做一些动态布局的优化。
-一、实现类似H5的流式布局如果了解H5的应该都知道它的流式布局非常方便，不需要考虑上下元素的关系。iOS的布局其实类似H5的绝对布局，但每每要写清楚上下元素之间的关系，而且每当页面有元素增删的时候..
             </p>
         </div>
     </a>

@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Swift 编译优化｜undefined
+        自定义Button, 约束布局｜undefined
         
     </title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2019/07/28/swift-compile/">
+    <link rel="canonical" href="http://jemesl.github.io/2019/10/03/ezbutton/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -137,12 +137,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Swift 编译优化</h1>
+                    <h1>自定义Button, 约束布局</h1>
                     
                     <span class="meta">
                          作者 Jemesl Wu
                         <span>
-                          日期 2019-07-28
+                          日期 2019-10-03
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -154,7 +154,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Swift 编译优化
+            自定义Button, 约束布局
         </span>
     </div>
 </header>
@@ -165,30 +165,18 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>swift 有些语法写起来很便捷, 但是编译效率却很低.<br>当代码量到一定程度, 编译起来, 耗费很多时间.</p>
-<p>###下面总结一些, 部分导致编译效率低下的写法.</p>
-<ol>
-<li>使用 ?? 来解包, 尤其是在某个表达式里面使用, 越复杂越低效, 低到难以置信</li>
-<li>数组拼接使用 + , 建议使用.append 方法进行</li>
-<li>字符串拼接不要使用+, 使用 “(var)”</li>
-<li>对于复杂的变量, 建议声明时写上类型</li>
-<li>对于像if 类似的条件判断里面表达式不要太复杂, 比较复杂的可以先算完在来判断</li>
-</ol>
+                <p>鉴于系统提供的UIButton 用起来非常不方便.<br>自定义了一个EZButton, 内部通过约束布局,.<br>支持图片文字,上下/左右排布.<br>支持居中, 居左, 居上, 居右, 居下等</p>
+<p><a href="https://github.com/JemesL/EZButton" target="_blank" rel="noopener">Demo</a></p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/10/03/jlstat/" data-toggle="tooltip" data-placement="top"
-                           title="JLSTAT">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/03/20/date/" data-toggle="tooltip" data-placement="top"
-                           title="Swift 时间格式处理">Next Post &rarr;</a>
+                        <a href="/2019/10/03/jlstat/" data-toggle="tooltip" data-placement="top"
+                           title="JLSTAT">Next Post &rarr;</a>
                     </li>
                     
                 </ul>

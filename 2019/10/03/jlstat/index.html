@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        jlstat｜undefined
+        JLSTAT｜undefined
         
     </title>
 
@@ -137,7 +137,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>jlstat</h1>
+                    <h1>JLSTAT</h1>
                     
                     <span class="meta">
                          作者 Jemesl Wu
@@ -154,7 +154,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            jlstat
+            JLSTAT
         </span>
     </div>
 </header>
@@ -165,11 +165,20 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                
+                <p>前面为了方便 给视图添加多状态操作, 是通过继承的方式添加属性来操作的.<br>这样的缺点是不得不为每一个空间都要写一个控件写一个子类.</p>
+<p>后面通过参照rxswift, 来给所有的view 添加多状态操作.</p>
+<p>主要也是先通过给view 添加一个 jl 的命名空间, 然后再通过运行时, 为 view 关联一个block.<br>设置状态时, 再调用关联的block.</p>
+<p><a href="https://github.com/JemesL/JLSTAT" target="_blank" rel="noopener">Demo</a></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">JLSpace</span> <span class="title">where</span> <span class="title">Base</span>: <span class="title">UIView</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setStatBlock</span>&lt;E&gt;<span class="params">(defaultValue: E, block: @escaping <span class="params">(Base, E)</span></span></span> -&gt; ()) &#123;</span><br><span class="line">        <span class="keyword">typealias</span> <span class="type">STATBE</span> = <span class="type">STAT</span>&lt;<span class="type">Base</span>, <span class="type">E</span>&gt;</span><br><span class="line">        <span class="keyword">let</span> stat = <span class="type">STATBE</span>(e: defaultValue, block: block)</span><br><span class="line">        objc_setAssociatedObject(<span class="keyword">self</span>.base, &amp;<span class="type">AssociatedKeys</span>.statKey, stat, .<span class="type">OBJC_ASSOCIATION_RETAIN</span>)</span><br><span class="line">        </span><br><span class="line">        block(<span class="keyword">self</span>.base, defaultValue)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">setStat</span>&lt;E&gt;<span class="params">(e: E)</span></span> &#123;</span><br><span class="line">        <span class="keyword">typealias</span> <span class="type">STATBE</span> = <span class="type">STAT</span>&lt;<span class="type">Base</span>, <span class="type">E</span>&gt;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">var</span> stat = objc_getAssociatedObject(<span class="keyword">self</span>.base, &amp;<span class="type">AssociatedKeys</span>.statKey) <span class="keyword">as</span>? <span class="type">STATBE</span> &#123;</span><br><span class="line">            stat.block?(<span class="keyword">self</span>.base, e)</span><br><span class="line">            stat.e = e</span><br><span class="line">            objc_setAssociatedObject(<span class="keyword">self</span>.base, &amp;<span class="type">AssociatedKeys</span>.statKey, stat, .<span class="type">OBJC_ASSOCIATION_RETAIN</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getStat</span>&lt;E&gt;<span class="params">()</span></span> -&gt; <span class="type">E</span>? &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> statBlock = objc_getAssociatedObject(<span class="keyword">self</span>.base, &amp;<span class="type">AssociatedKeys</span>.statKey) <span class="keyword">as</span>? <span class="type">STAT</span>&lt;<span class="type">Base</span>, <span class="type">E</span>&gt; &#123;</span><br><span class="line">            <span class="keyword">return</span> statBlock.e</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">STAT</span>&lt;<span class="title">Base</span>, <span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">STATBLOCK</span> = (<span class="type">Base</span>, <span class="type">E</span>) -&gt; ()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> block: <span class="type">STATBLOCK</span>?</span><br><span class="line">    <span class="keyword">var</span> e: <span class="type">E</span>?</span><br><span class="line">    <span class="keyword">init</span>(e: <span class="type">E</span>?, block: <span class="type">STATBLOCK</span>?) &#123;</span><br><span class="line">        <span class="keyword">self</span>.block = block</span><br><span class="line">        <span class="keyword">self</span>.e = e</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
                 <hr>
                 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/10/03/ezbutton/" data-toggle="tooltip" data-placement="top"
+                           title="自定义Button, 约束布局">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
