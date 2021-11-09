@@ -25,14 +25,20 @@
     <link rel="canonical" href="http://jemesl.github.io/2018/09/12/ios-constraints/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
 
@@ -167,9 +173,14 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>在开发过程中经常会遇到页面显示正常，但依然还有冲突警告。<br>通常的原因有2个。</p>
 <h3 id="一、cell-中的约束冲突"><a href="#一、cell-中的约束冲突" class="headerlink" title="一、cell 中的约束冲突"></a>一、cell 中的约束冲突</h3><p>在这种情况下，在 xcode 的控制台打印出得信息当中会单独拎出一条约束。<br>Will attempt to recover by breaking constraint 下面那一条</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Probably</span> at least one of the constraints <span class="keyword">in</span> the following list <span class="keyword">is</span> one you don't want. </span><br><span class="line"><span class="type">Try</span> this: </span><br><span class="line">    (<span class="number">1</span>) look at each constraint and <span class="keyword">try</span> to figure out which you don't expect; </span><br><span class="line">    (<span class="number">2</span>) <span class="built_in">find</span> the code that added the unwanted constraint or constraints and fix it. </span><br><span class="line">(</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a08a0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.left == UIView:0x7fae99d55e70.left&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a0900@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.top == UIView:0x7fae99d55e70.top&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a0960@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.right == UIView:0x7fae99d55e70.right&gt;"</span>,</span><br><span class="line">    <span class="string">"&lt;SnapKit.LayoutConstraint:0x6040002a09c0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.bottom == UIView:0x7fae99d55e70.bottom&gt;"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="type">Will</span> attempt to recover by breaking constraint </span><br><span class="line">&lt;<span class="type">SnapKit</span>.<span class="type">LayoutConstraint</span>:<span class="number">0x6040002a0a20</span>@<span class="type">ChoiceArticleCell</span>.swift#<span class="number">183</span> <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.height == <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.width * <span class="number">0.425531923770905</span>&gt;</span><br></pre></td></tr></table></figure>
-<p>解决办法就是：将这条约束的 <strong>优先级降低</strong>。约束默认的优先级是1000。<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make.height.equalTo(cover.snp.width).multipliedBy(<span class="number">1</span>/<span class="number">2.35</span>).priority(<span class="number">999</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、普通view里面-会出现-约束冲突"><a href="#二、普通view里面-会出现-约束冲突" class="headerlink" title="二、普通view里面 会出现 约束冲突"></a>二、普通view里面 会出现 约束冲突</h3><p>这种情况 通常是view的 <strong>translatesAutoresizingMaskIntoConstraints</strong>属性 导致<br>将其改为 false 可以解决问题<br>针对 view<br>如果使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 false<br>如果不使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 true<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.translatesAutoresizingMaskIntoConstraints = <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Probably</span> at least one of the constraints <span class="keyword">in</span> the following list <span class="keyword">is</span> one you don&#x27;t want. </span><br><span class="line"><span class="type">Try</span> this: </span><br><span class="line">    (<span class="number">1</span>) look at each constraint and <span class="keyword">try</span> to figure out which you don&#x27;t expect; </span><br><span class="line">    (<span class="number">2</span>) find the code that added the unwanted constraint or constraints and fix it. </span><br><span class="line">(</span><br><span class="line">    <span class="string">&quot;&lt;SnapKit.LayoutConstraint:0x6040002a08a0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.left == UIView:0x7fae99d55e70.left&gt;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&lt;SnapKit.LayoutConstraint:0x6040002a0900@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.top == UIView:0x7fae99d55e70.top&gt;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&lt;SnapKit.LayoutConstraint:0x6040002a0960@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.right == UIView:0x7fae99d55e70.right&gt;&quot;</span>,</span><br><span class="line">    <span class="string">&quot;&lt;SnapKit.LayoutConstraint:0x6040002a09c0@ChoiceArticleCell.swift#182 UIImageView:0x7fae99d49240.bottom == UIView:0x7fae99d55e70.bottom&gt;&quot;</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="type">Will</span> attempt to recover by breaking constraint </span><br><span class="line"><span class="operator">&lt;</span><span class="type">SnapKit</span>.<span class="type">LayoutConstraint</span>:<span class="number">0x6040002a0a20</span><span class="meta">@ChoiceArticleCell</span>.swift#<span class="number">183</span> <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.height <span class="operator">==</span> <span class="type">UIImageView</span>:<span class="number">0x7fae99d49240</span>.width <span class="operator">*</span> <span class="number">0.425531923770905</span><span class="operator">&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>解决办法就是：将这条约束的 <strong>优先级降低</strong>。约束默认的优先级是1000。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make.height.equalTo(cover.snp.width).multipliedBy(<span class="number">1</span><span class="operator">/</span><span class="number">2.35</span>).priority(<span class="number">999</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="二、普通view里面-会出现-约束冲突"><a href="#二、普通view里面-会出现-约束冲突" class="headerlink" title="二、普通view里面 会出现 约束冲突"></a>二、普通view里面 会出现 约束冲突</h3><p>这种情况 通常是view的 <strong>translatesAutoresizingMaskIntoConstraints</strong>属性 导致<br>将其改为 false 可以解决问题<br>针对 view<br>如果使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 false<br>如果不使用 autulayout 就将 translatesAutoresizingMaskIntoConstraints 设为 true</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span>.translatesAutoresizingMaskIntoConstraints <span class="operator">=</span> <span class="literal">false</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>在 tableview 的 header or footerview 使用约束的 view<br>该 view 的 translatesAutoresizingMaskIntoConstraints 属性需要设置为 true</p>
 
                 <hr>
@@ -199,7 +210,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、cell-中的约束冲突"><span class="toc-text">一、cell 中的约束冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、普通view里面-会出现-约束冲突"><span class="toc-text">二、普通view里面 会出现 约束冲突</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81cell-%E4%B8%AD%E7%9A%84%E7%BA%A6%E6%9D%9F%E5%86%B2%E7%AA%81"><span class="toc-text">一、cell 中的约束冲突</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%99%AE%E9%80%9Aview%E9%87%8C%E9%9D%A2-%E4%BC%9A%E5%87%BA%E7%8E%B0-%E7%BA%A6%E6%9D%9F%E5%86%B2%E7%AA%81"><span class="toc-text">二、普通view里面 会出现 约束冲突</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -251,11 +262,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2019
+                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -264,13 +275,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

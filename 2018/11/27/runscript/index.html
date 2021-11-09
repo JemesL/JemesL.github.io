@@ -25,14 +25,20 @@
     <link rel="canonical" href="http://jemesl.github.io/2018/11/27/runscript/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
 
@@ -166,7 +172,9 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>每次打包经常会遇到忘记修改 bulid 导致上传失败，又不得不重新打包上传，极其浪费时间。<br>xcode 的 Build Phases 的run script 可以添加脚本，来自动更新build的值</p>
-<p>代码如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git=`sh /etc/profile; <span class="built_in">which</span> git`</span><br><span class="line">appBuild=`<span class="string">"<span class="variable">$git</span>"</span> rev-list --all |wc -l`</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$CONFIGURATION</span> = <span class="string">"Debug"</span> ]; <span class="keyword">then</span></span><br><span class="line">branchName=`<span class="string">"<span class="variable">$git</span>"</span> rev-parse --abbrev-ref HEAD`</span><br><span class="line">branchShort=`<span class="string">"<span class="variable">$git</span>"</span> rev-parse --abbrev-short HEAD`</span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :BranchName <span class="variable">$branchName</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :BranchShort <span class="variable">$branchShort</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :APPBuildNum <span class="variable">$appBuild</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">"Set :CFBundleVersion <span class="variable">$appBuild</span>"</span> <span class="string">"<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"Updated <span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p>代码如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">git=`sh /etc/profile; <span class="built_in">which</span> git`</span><br><span class="line">appBuild=`<span class="string">&quot;<span class="variable">$git</span>&quot;</span> rev-list --all |wc -l`</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> [ <span class="variable">$CONFIGURATION</span> = <span class="string">&quot;Debug&quot;</span> ]; <span class="keyword">then</span></span><br><span class="line">branchName=`<span class="string">&quot;<span class="variable">$git</span>&quot;</span> rev-parse --abbrev-ref HEAD`</span><br><span class="line">branchShort=`<span class="string">&quot;<span class="variable">$git</span>&quot;</span> rev-parse --abbrev-short HEAD`</span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">&quot;Set :BranchName <span class="variable">$branchName</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">&quot;Set :BranchShort <span class="variable">$branchShort</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">&quot;Set :APPBuildNum <span class="variable">$appBuild</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">/usr/libexec/PlistBuddy -c <span class="string">&quot;Set :CFBundleVersion <span class="variable">$appBuild</span>&quot;</span> <span class="string">&quot;<span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span></span><br><span class="line"><span class="keyword">fi</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">&quot;Updated <span class="variable">$&#123;TARGET_BUILD_DIR&#125;</span>/<span class="variable">$&#123;INFOPLIST_PATH&#125;</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
 <p>其中  <strong>BranchName</strong>、<strong>BranchShort</strong>、<strong>APPBuildNum</strong>、<strong>CFBundleVersion</strong>，前三个需要在info.plist 新增字段<br>也可以根据需求自定义其他字段。<br>这里根据 debug 和 release 做了区分。<br>DEBUG： 可以拿到 分支名字、 分支commitID、build次数<br>RELEASE：可以拿到build 次数</p>
 <p>ps：目前，在多target版本还有点问题，在最初的target里没有问题，但是在copy出来的其他target暂时无法运行</p>
 
@@ -254,11 +262,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2019
+                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -267,13 +275,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

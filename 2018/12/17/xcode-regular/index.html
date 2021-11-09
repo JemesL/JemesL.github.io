@@ -25,14 +25,20 @@
     <link rel="canonical" href="http://jemesl.github.io/2018/12/17/xcode-regular/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
-</head>
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
 
 <style>
 
@@ -168,7 +174,7 @@
                 <p>这里说的正则不是指的swift里的正则，而是xcode自带的搜索替换功能中使用正则来修改文件代码。<br>之前有个需求就是多人开发的项目，由于个人风格原因，导致部分代码书写规范不一致。<br>但是项目已经很大了，差不多也有近七万行代码。想手动一个一个去改是不太现实的，所以想到正则。<br>于是去搜了搜，发现xcode自带这个功能，这下正好省事了。</p>
 <p>至于正则规则如何，网上有很多教程，就不多说了。</p>
 <h4 id="1-切换-Find-Replace-模式"><a href="#1-切换-Find-Replace-模式" class="headerlink" title="1. 切换 Find/Replace 模式"></a>1. 切换 Find/Replace 模式</h4><p>按Command+Shift+F / Command+F 快捷键快速进入Find 模式，点击Find后第二个箭头，可以切换查找模式至 Regular Expression。<br>在下面的输入框就可以输入正则表达式来进行查询替换</p>
-<h3 id="2-举个🌰"><a href="#2-举个🌰" class="headerlink" title="2. 举个🌰"></a>2. 举个🌰</h3><p>现在需要优化一下代码书写规范，需要每个冒号后面都需要添加空格<br>在Find 栏填入 <strong>“:([^\s])”</strong> ,会匹配冒号后带任何非空字符<br>为了避免匹配上 <strong>“[:]”</strong> 或者 <strong>“http://“</strong> 的情况<br>可以改为 <strong>“:([^\s\/]])”</strong></p>
+<h3 id="2-举个🌰"><a href="#2-举个🌰" class="headerlink" title="2. 举个🌰"></a>2. 举个🌰</h3><p>现在需要优化一下代码书写规范，需要每个冒号后面都需要添加空格<br>在Find 栏填入 <strong>“:([^\s])”</strong> ,会匹配冒号后带任何非空字符<br>为了避免匹配上 <strong>“[:]”</strong> 或者 <strong>“http://“</strong> 的情况<br>可以改为 <strong>“:([^\s/]])”</strong></p>
 <p>如果需要替换成带空格的，则切到Replace 模式<br>在Replace 一栏填入 <strong>“: $1”</strong><br><strong>“$1”</strong> 是Find 中正则表达式中圆括号匹配到的内容</p>
 
                 <hr>
@@ -203,7 +209,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-切换-Find-Replace-模式"><span class="toc-text">1. 切换 Find/Replace 模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-举个🌰"><span class="toc-text">2. 举个🌰</span></a>
+                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%88%87%E6%8D%A2-Find-Replace-%E6%A8%A1%E5%BC%8F"><span class="toc-text">1. 切换 Find&#x2F;Replace 模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%B8%BE%E4%B8%AA%F0%9F%8C%B0"><span class="toc-text">2. 举个🌰</span></a>
                 </div>
             </div>
         </div>
@@ -255,11 +261,11 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2019
+                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
-                    Theme by <a href="https://haojen.github.io/">Haojen Ma</a>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
                 </p>
 
             </div>
@@ -268,13 +274,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>
