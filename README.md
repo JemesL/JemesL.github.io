@@ -7,7 +7,8 @@
 
 ## 前置依赖安装
 - [hexo 官网](https://hexo.io/zh-cn/docs/)
-- 安装全局 hexo `npm install hexo-cli -g`
+- 安装 hexo `npm install hexo-cli -g`
+- 安装 hexo git 提交插件 `npm install hexo-deployer-git -g`
 - 安装依赖 `npm i`
 
 ## 预览部署
@@ -19,12 +20,12 @@
 - 新建文章 `hexo new filename`
 
 ## 分支介绍
-### hexo
+### master
 > 仅在此分支下进行操作。
 > 例如：新建文章、预览部署等。
 
-### master 分支
-> master 分支不做任何操作。
-> 在 hexo 分支下进行部署会发布到 `origing/master` 分支, 配置路径再 `./_config.yml`
+### blog 分支
+> blog 分支不做任何操作。
+> 在 `master` 分支下进行部署会发布到 `origin/blog` 分支, 在 `./_config.yml` 进行相关配置。
 
 
