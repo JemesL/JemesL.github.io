@@ -1,390 +1,476 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" data-default-color-scheme=auto>
 
-<!-- Head tag -->
+
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        Swift 4.0 编码规范｜undefined
-        
-    </title>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/J.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="我心中有猛虎，细嗅蔷薇">
+  <meta name="author" content="Jemesl Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="1.编码格式 每行最多160个字符，这样可以避免一行过长。 (Xcode-&gt;Preferences-&gt;Text Editing-&gt;Page guide at column: 设置成160即可)  确保每行都不以空白字符作为结尾 （Xcode-&gt;Preferences-&gt;Text Editing-&gt;Automatically trim trailing white">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 4.0 编码规范">
+<meta property="og:url" content="http://jemesl.github.io/2018/12/05/swiftcode/index.html">
+<meta property="og:site_name" content="Jemesl&#39;s blogs">
+<meta property="og:description" content="1.编码格式 每行最多160个字符，这样可以避免一行过长。 (Xcode-&gt;Preferences-&gt;Text Editing-&gt;Page guide at column: 设置成160即可)  确保每行都不以空白字符作为结尾 （Xcode-&gt;Preferences-&gt;Text Editing-&gt;Automatically trim trailing white">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-12-05T06:28:44.000Z">
+<meta property="article:modified_time" content="2019-10-30T03:02:09.000Z">
+<meta property="article:author" content="Jemesl Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Swift 4.0 编码规范 - Jemesl&#39;s blogs</title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/12/05/swiftcode/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
-    <!-- Bootstrap Core CSS -->
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
     
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
-<link rel="stylesheet" href="/css/syntax.css">
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jemesl.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    我心中有猛虎，细嗅蔷薇
-                </span>
-                's Blog
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jemesl</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Swift 4.0 编码规范">
+              
+            </span>
 
-<!-- Main Content -->
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-12-05 14:28" pubdate>
+        December 5, 2018 pm
+      </time>
+    </span>
+  
+</div>
 
-<!--only post-->
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
 
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      9 分钟
+    </span>
+  
 
-<img class="wechat-title-img"
-     src="">
+  
+  
+</div>
 
+            
+          </div>
 
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>Swift 4.0 编码规范</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2018-12-05
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
+          
         </div>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            Swift 4.0 编码规范
-        </span>
-    </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h3 id="1-编码格式"><a href="#1-编码格式" class="headerlink" title="1.编码格式"></a>1.编码格式</h3><ul>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Swift 4.0 编码规范</h1>
+            
+            <div class="markdown-body">
+              <h3 id="1-编码格式"><a href="#1-编码格式" class="headerlink" title="1.编码格式"></a>1.编码格式</h3><ul>
 <li><p>每行最多160个字符，这样可以避免一行过长。 (Xcode-&gt;Preferences-&gt;Text Editing-&gt;Page guide at column: 设置成160即可)</p>
 </li>
 <li><p>确保每行都不以空白字符作为结尾 （Xcode-&gt;Preferences-&gt;Text Editing-&gt;Automatically trim trailing whitespace + Including whitespace-only lines).</p>
 </li>
 <li><p>使用二元运算符(+, -，==, 或-&gt;)的前后都需要添加空格</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> value <span class="operator">=</span> (<span class="number">1</span> <span class="operator">+</span> <span class="number">2</span>) <span class="operator">*</span> <span class="number">3</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> value <span class="hljs-operator">=</span> (<span class="hljs-number">1</span> <span class="hljs-operator">+</span> <span class="hljs-number">2</span>) <span class="hljs-operator">*</span> <span class="hljs-number">3</span><br></code></pre></td></tr></table></figure></li>
 <li><p>在逗号、冒号后面加一个空格</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr <span class="operator">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line"><span class="keyword">let</span> dict <span class="operator">=</span> [<span class="string">&quot;123&quot;</span>: <span class="number">123</span>]</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> arr <span class="hljs-operator">=</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]<br><span class="hljs-keyword">let</span> dict <span class="hljs-operator">=</span> [<span class="hljs-string">&quot;123&quot;</span>: <span class="hljs-number">123</span>]<br></code></pre></td></tr></table></figure></li>
 <li><p>方法的左大括号不要另起，并和方法名之间留有空格，注释空格</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 注释</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">makeSomething</span> </span>&#123;</span><br><span class="line">  <span class="comment">// coding</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// 注释</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeSomething</span> </span>&#123;<br>  <span class="hljs-comment">// coding</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>判断语句不用括号</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> isTrue <span class="operator">=</span> <span class="literal">true</span> &#123;</span><br><span class="line">  <span class="comment">// coding</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">if</span> isTrue <span class="hljs-operator">=</span> <span class="hljs-literal">true</span> &#123;<br>  <span class="hljs-comment">// coding</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>方法的左大括号不要另起，并和方法名之间留有空格，注释空格</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> isTrue <span class="operator">=</span> <span class="literal">true</span> &#123;</span><br><span class="line">  <span class="comment">// coding</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">if</span> isTrue <span class="hljs-operator">=</span> <span class="hljs-literal">true</span> &#123;<br>  <span class="hljs-comment">// coding</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>尽量不使用self. 除非方法参数与属性同名</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">setContent</span>(<span class="params">name</span>: <span class="type">String</span>, <span class="params">count</span>: <span class="type">Int</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">self</span>.name <span class="operator">=</span> name</span><br><span class="line">    c <span class="operator">=</span> count</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">setContent</span>(<span class="hljs-params">name</span>: <span class="hljs-type">String</span>, <span class="hljs-params">count</span>: <span class="hljs-type">Int</span>)</span> &#123;<br>    <span class="hljs-keyword">self</span>.name <span class="hljs-operator">=</span> name<br>    c <span class="hljs-operator">=</span> count<br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>在访问枚举类型时，使用更简洁的点语法</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">ShareToPlatform</span> </span>&#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="type">WX</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">TimeLine</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">QQ</span></span><br><span class="line">  <span class="keyword">case</span> <span class="type">Sina</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> platform <span class="operator">=</span> .<span class="type">QQ</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">ShareToPlatform</span> </span>&#123;<br>  <span class="hljs-keyword">case</span> <span class="hljs-type">WX</span><br>  <span class="hljs-keyword">case</span> <span class="hljs-type">TimeLine</span><br>  <span class="hljs-keyword">case</span> <span class="hljs-type">QQ</span><br>  <span class="hljs-keyword">case</span> <span class="hljs-type">Sina</span><br>&#125;<br><span class="hljs-keyword">let</span> platform <span class="hljs-operator">=</span> .<span class="hljs-type">QQ</span><br></code></pre></td></tr></table></figure></li>
 <li><p>使用 // MARK: -，按功能、协议、代理等分组</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - UITableViewDelegate</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - Action</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - Request</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// MARK: - UITableViewDelegate</span><br><br><span class="hljs-comment">// MARK: - Action</span><br><br><span class="hljs-comment">// MARK: - Request</span><br></code></pre></td></tr></table></figure></li>
 <li><p>使用extension 隔离方法集，相关协议、类似功能放在一个extension里</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - UICollectionViewDelegate</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">JLViewController</span>: <span class="title">UICollectionViewDelegate</span> </span>&#123;</span><br><span class="line">	<span class="comment">// 代理方法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// MARK: - UICollectionViewDelegate</span><br><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">JLViewController</span>: <span class="hljs-title">UICollectionViewDelegate</span> </span>&#123;<br>	<span class="hljs-comment">// 代理方法</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li><p>当对外接口不兼容时，使用@available(iOS x.0, *) 标明接口适配的起始系统版本号</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@available</span>(<span class="keyword">iOS</span> <span class="number">10.0</span>, <span class="operator">*</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleSome</span>()</span> &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">@available</span>(<span class="hljs-keyword">iOS</span> <span class="hljs-number">10.0</span>, <span class="hljs-operator">*</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleSome</span>()</span> &#123;<br>    <span class="hljs-comment">//</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="2-命名规范"><a href="#2-命名规范" class="headerlink" title="2.命名规范"></a>2.命名规范</h3><ul>
-<li>常量，变量，函数，方法的命名规则使用小驼峰规则，首字母小写，类型名使用大驼峰规则，首字母大写。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@available</span>(<span class="keyword">iOS</span> <span class="number">10.0</span>, <span class="operator">*</span>)</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">handleSome</span>()</span> &#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>当命名里出现缩写词时，缩写词要么全部大写，要么全部小写，以首字母大小写为准<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> htmlString <span class="operator">=</span> <span class="string">&quot;https://www.baidu.com&quot;</span></span><br><span class="line"><span class="keyword">let</span> urlString:  <span class="type">URLString</span></span><br><span class="line"><span class="keyword">let</span> userID:  <span class="type">UserID</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HTMLModel</span> </span>&#123;</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>bool类型命名时，使用is作为前缀<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isHave: <span class="type">Bool</span> <span class="operator">=</span> <span class="literal">false</span></span><br></pre></td></tr></table></figure></li>
-<li>使用前缀 k + 大骆驼命名法 为所有非单例的静态常量命名。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClassName</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 基元常量使用 k 作为前缀</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> kSomeConstantHeight: <span class="type">CGFloat</span> <span class="operator">=</span> <span class="number">80.0</span></span><br><span class="line">    <span class="comment">// 非基元常量也是用 k 作为前缀</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> kDeleteButtonColor <span class="operator">=</span> <span class="type">UIColor</span>.redColor()</span><br><span class="line">    <span class="comment">// 对于单例不要使用k作为前缀</span></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance <span class="operator">=</span> <span class="type">MyClassName</span>()</span><br><span class="line">    <span class="comment">/* ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>常量，变量，函数，方法的命名规则使用小驼峰规则，首字母小写，类型名使用大驼峰规则，首字母大写。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">@available</span>(<span class="hljs-keyword">iOS</span> <span class="hljs-number">10.0</span>, <span class="hljs-operator">*</span>)<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">handleSome</span>()</span> &#123;<br>    <span class="hljs-comment">//</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>当命名里出现缩写词时，缩写词要么全部大写，要么全部小写，以首字母大小写为准<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> htmlString <span class="hljs-operator">=</span> <span class="hljs-string">&quot;https://www.baidu.com&quot;</span><br><span class="hljs-keyword">let</span> urlString:  <span class="hljs-type">URLString</span><br><span class="hljs-keyword">let</span> userID:  <span class="hljs-type">UserID</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HTMLModel</span> </span>&#123;<br>    <span class="hljs-comment">//</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li>bool类型命名时，使用is作为前缀<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> isHave: <span class="hljs-type">Bool</span> <span class="hljs-operator">=</span> <span class="hljs-literal">false</span><br></code></pre></td></tr></table></figure></li>
+<li>使用前缀 k + 大骆驼命名法 为所有非单例的静态常量命名。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MyClassName</span> </span>&#123;<br>    <span class="hljs-comment">// 基元常量使用 k 作为前缀</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">let</span> kSomeConstantHeight: <span class="hljs-type">CGFloat</span> <span class="hljs-operator">=</span> <span class="hljs-number">80.0</span><br>    <span class="hljs-comment">// 非基元常量也是用 k 作为前缀</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">let</span> kDeleteButtonColor <span class="hljs-operator">=</span> <span class="hljs-type">UIColor</span>.redColor()<br>    <span class="hljs-comment">// 对于单例不要使用k作为前缀</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-keyword">let</span> sharedInstance <span class="hljs-operator">=</span> <span class="hljs-type">MyClassName</span>()<br>    <span class="hljs-comment">/* ... */</span><br>&#125;<br></code></pre></td></tr></table></figure>
 <h3 id="3-代码风格"><a href="#3-代码风格" class="headerlink" title="3.代码风格"></a>3.代码风格</h3></li>
 <li>如果需要把访问修饰符放到第一个位置。</li>
 <li>尽可能的多使用let，少使用var。</li>
-<li>当需要遍历一个集合并变形成另一个集合时，推荐使用函数 map, filter 和 reduce。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐</span></span><br><span class="line"><span class="keyword">let</span> stringOfInts <span class="operator">=</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].flatMap &#123; <span class="type">String</span>(<span class="variable">$0</span>) &#125;</span><br><span class="line"><span class="comment">// [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</span></span><br><span class="line"><span class="comment">// 不推荐</span></span><br><span class="line"><span class="keyword">var</span> stringOfInts: [<span class="type">String</span>] <span class="operator">=</span> []</span><br><span class="line"><span class="keyword">for</span> integer <span class="keyword">in</span> [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] &#123;</span><br><span class="line">    stringOfInts.append(<span class="type">String</span>(integer))</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 推荐</span></span><br><span class="line"><span class="keyword">let</span> evenNumbers <span class="operator">=</span> [<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>].filter &#123; <span class="variable">$0</span> <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span> &#125;</span><br><span class="line"><span class="comment">// [4, 8, 16, 42]</span></span><br><span class="line"><span class="comment">// 不推荐</span></span><br><span class="line"><span class="keyword">var</span> evenNumbers: [<span class="type">Int</span>] <span class="operator">=</span> []</span><br><span class="line"><span class="keyword">for</span> integer <span class="keyword">in</span> [<span class="number">4</span>, <span class="number">8</span>, <span class="number">15</span>, <span class="number">16</span>, <span class="number">23</span>, <span class="number">42</span>] &#123;</span><br><span class="line">    <span class="keyword">if</span> integer <span class="operator">%</span> <span class="number">2</span> <span class="operator">==</span> <span class="number">0</span> &#123;</span><br><span class="line">        evenNumbers(integer)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>当需要遍历一个集合并变形成另一个集合时，推荐使用函数 map, filter 和 reduce。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// 推荐</span><br><span class="hljs-keyword">let</span> stringOfInts <span class="hljs-operator">=</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].flatMap &#123; <span class="hljs-type">String</span>(<span class="hljs-variable">$0</span>) &#125;<br><span class="hljs-comment">// [&quot;1&quot;, &quot;2&quot;, &quot;3&quot;]</span><br><span class="hljs-comment">// 不推荐</span><br><span class="hljs-keyword">var</span> stringOfInts: [<span class="hljs-type">String</span>] <span class="hljs-operator">=</span> []<br><span class="hljs-keyword">for</span> integer <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>] &#123;<br>    stringOfInts.append(<span class="hljs-type">String</span>(integer))<br>&#125;<br><span class="hljs-comment">// 推荐</span><br><span class="hljs-keyword">let</span> evenNumbers <span class="hljs-operator">=</span> [<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>].filter &#123; <span class="hljs-variable">$0</span> <span class="hljs-operator">%</span> <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span> &#125;<br><span class="hljs-comment">// [4, 8, 16, 42]</span><br><span class="hljs-comment">// 不推荐</span><br><span class="hljs-keyword">var</span> evenNumbers: [<span class="hljs-type">Int</span>] <span class="hljs-operator">=</span> []<br><span class="hljs-keyword">for</span> integer <span class="hljs-keyword">in</span> [<span class="hljs-number">4</span>, <span class="hljs-number">8</span>, <span class="hljs-number">15</span>, <span class="hljs-number">16</span>, <span class="hljs-number">23</span>, <span class="hljs-number">42</span>] &#123;<br>    <span class="hljs-keyword">if</span> integer <span class="hljs-operator">%</span> <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span> &#123;<br>        evenNumbers(integer)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 <li>如果变量类型可以依靠推断得出，不建议声明变量时指明类型。</li>
 <li>不要使用 as! 或 try!。</li>
-<li>我们推荐使用提前返回的策略，而不是 if 语句的嵌套。使用 guard 语句可以改善代码的可读性。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eatDoughnut</span>(<span class="params">atIndex</span> <span class="params">index</span>: <span class="type">Int</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">guard</span> index <span class="operator">&gt;=</span> <span class="number">0</span> <span class="operator">&amp;&amp;</span> index <span class="operator">&lt;</span> doughnuts <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 如果 index 超出允许范围，提前返回。</span></span><br><span class="line">        <span class="keyword">return</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">let</span> doughnut <span class="operator">=</span> doughnuts[index]</span><br><span class="line">    eat(doughnut)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 不推荐</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">eatDoughnuts</span>(<span class="params">atIndex</span> <span class="params">index</span>: <span class="type">Int</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> index <span class="operator">&gt;=</span> <span class="number">0</span> <span class="operator">&amp;&amp;</span> index <span class="operator">&lt;</span> donuts.count &#123;</span><br><span class="line">        <span class="keyword">let</span> doughnut <span class="operator">=</span> doughnuts[index]</span><br><span class="line">        eat(doughnut)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>我们推荐使用提前返回的策略，而不是 if 语句的嵌套。使用 guard 语句可以改善代码的可读性。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// 推荐</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">eatDoughnut</span>(<span class="hljs-params">atIndex</span> <span class="hljs-params">index</span>: <span class="hljs-type">Int</span>)</span> &#123;<br>    <span class="hljs-keyword">guard</span> index <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span> <span class="hljs-operator">&amp;&amp;</span> index <span class="hljs-operator">&lt;</span> doughnuts <span class="hljs-keyword">else</span> &#123;<br>        <span class="hljs-comment">// 如果 index 超出允许范围，提前返回。</span><br>        <span class="hljs-keyword">return</span><br>    &#125;<br>    <span class="hljs-keyword">let</span> doughnut <span class="hljs-operator">=</span> doughnuts[index]<br>    eat(doughnut)<br>&#125;<br><span class="hljs-comment">// 不推荐</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">eatDoughnuts</span>(<span class="hljs-params">atIndex</span> <span class="hljs-params">index</span>: <span class="hljs-type">Int</span>)</span> &#123;<br>    <span class="hljs-keyword">if</span> index <span class="hljs-operator">&gt;=</span> <span class="hljs-number">0</span> <span class="hljs-operator">&amp;&amp;</span> index <span class="hljs-operator">&lt;</span> donuts.count &#123;<br>        <span class="hljs-keyword">let</span> doughnut <span class="hljs-operator">=</span> doughnuts[index]<br>        eat(doughnut)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="4-注释规范"><a href="#4-注释规范" class="headerlink" title="4.注释规范"></a>4.注释规范</h3><ul>
-<li>MARK，用于方法或函数的注释。加上 ‘-’ 再函数列表会多一个横线分割<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - 描述内容</span></span><br><span class="line"><span class="comment">// MARK: 描述内容</span></span><br></pre></td></tr></table></figure></li>
-<li>TODO，表示这里代码有没有完成，还要处理。加上 ‘-’ 再函数列表会多一个横线分割<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">TODO:</span> - 描述内容</span></span><br><span class="line"><span class="comment">// <span class="doctag">TODO:</span> 描述内容</span></span><br></pre></td></tr></table></figure></li>
-<li>FIXME，需要修改代码，bug等。加上 ‘-’ 再函数列表会多一个横线分割，且显示的icon 与mark和todo不通，更醒目<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// <span class="doctag">FIXME:</span> - 描述内容</span></span><br><span class="line"><span class="comment">// <span class="doctag">FIXME:</span> 描述内容</span></span><br></pre></td></tr></table></figure></li>
-<li>添加文档注释（xcode 快捷键⌘⌥/）<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/// 获取用户的帐密信息</span></span><br><span class="line"><span class="comment">///</span></span><br><span class="line"><span class="comment">/// - Returns: 信息元组的 Observable</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fetchLocalInfo</span>()</span> -&gt; <span class="type">Observable</span>&lt;(<span class="type">String</span>, <span class="type">String</span>)?&gt; &#123;</span><br><span class="line">    <span class="comment">// coding</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>MARK，用于方法或函数的注释。加上 ‘-’ 再函数列表会多一个横线分割<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// MARK: - 描述内容</span><br><span class="hljs-comment">// MARK: 描述内容</span><br></code></pre></td></tr></table></figure></li>
+<li>TODO，表示这里代码有没有完成，还要处理。加上 ‘-’ 再函数列表会多一个横线分割<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> - 描述内容</span><br><span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> 描述内容</span><br></code></pre></td></tr></table></figure></li>
+<li>FIXME，需要修改代码，bug等。加上 ‘-’ 再函数列表会多一个横线分割，且显示的icon 与mark和todo不通，更醒目<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> - 描述内容</span><br><span class="hljs-comment">// <span class="hljs-doctag">FIXME:</span> 描述内容</span><br></code></pre></td></tr></table></figure></li>
+<li>添加文档注释（xcode 快捷键⌘⌥/）<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">/// 获取用户的帐密信息</span><br><span class="hljs-comment">///</span><br><span class="hljs-comment">/// - Returns: 信息元组的 Observable</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fetchLocalInfo</span>()</span> -&gt; <span class="hljs-type">Observable</span>&lt;(<span class="hljs-type">String</span>, <span class="hljs-type">String</span>)?&gt; &#123;<br>    <span class="hljs-comment">// coding</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/12/17/xcode-regular/" data-toggle="tooltip" data-placement="top"
-                           title="Xcode 利用正则进行搜索&替换">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/11/27/runscript/" data-toggle="tooltip" data-placement="top"
-                           title="Xcode 添加 script 自动更新 Build">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
             </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F"><span class="toc-text">1.编码格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83"><span class="toc-text">2.命名规范</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC"><span class="toc-text">3.代码风格</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%B3%A8%E9%87%8A%E8%A7%84%E8%8C%83"><span class="toc-text">4.注释规范</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
                 
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
                 </p>
-
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/12/17/xcode-regular/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Xcode 利用正则进行搜索&替换</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/11/27/runscript/">
+                        <span class="hidden-mobile">Xcode 添加 script 自动更新 Build</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
+
+            
+          </article>
         </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<!-- jQuery -->
 
-<script src="/js/jquery.min.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-</script>
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-<!-- Google Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-<!-- Baidu Tongji -->
+  
 
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','','2.0.0');
-</script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
 </html>

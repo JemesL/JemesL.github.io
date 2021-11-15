@@ -1,184 +1,249 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" data-default-color-scheme=auto>
 
-<!-- Head tag -->
+
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        WkWebview 与 js 交互｜undefined
-        
-    </title>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/J.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="我心中有猛虎，细嗅蔷薇">
+  <meta name="author" content="Jemesl Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="最近由于项目的原因，需要wkwebview 与 js 频繁的交互主要有以下两种  Content-Blocking Rules 调用wkwebview 的js执行脚本的方法 JS 调用 swift  一、Content-Blocking Rules如果是iOS11 之后的并且需求简单 wkwebview 提供了一个内容过滤规则的功能。可以简单处理一些操作。这个的好处是webview显示内容之前就可">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WkWebview 与 js 交互">
+<meta property="og:url" content="http://jemesl.github.io/2018/09/13/wkwebview-js/index.html">
+<meta property="og:site_name" content="Jemesl&#39;s blogs">
+<meta property="og:description" content="最近由于项目的原因，需要wkwebview 与 js 频繁的交互主要有以下两种  Content-Blocking Rules 调用wkwebview 的js执行脚本的方法 JS 调用 swift  一、Content-Blocking Rules如果是iOS11 之后的并且需求简单 wkwebview 提供了一个内容过滤规则的功能。可以简单处理一些操作。这个的好处是webview显示内容之前就可">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-13T03:50:38.000Z">
+<meta property="article:modified_time" content="2019-10-30T03:02:09.000Z">
+<meta property="article:author" content="Jemesl Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>WkWebview 与 js 交互 - Jemesl&#39;s blogs</title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/13/wkwebview-js/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
-    <!-- Bootstrap Core CSS -->
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
     
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
-<link rel="stylesheet" href="/css/syntax.css">
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jemesl.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    我心中有猛虎，细嗅蔷薇
-                </span>
-                's Blog
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jemesl</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WkWebview 与 js 交互">
+              
+            </span>
 
-<!-- Main Content -->
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-13 11:50" pubdate>
+        September 13, 2018 am
+      </time>
+    </span>
+  
+</div>
 
-<!--only post-->
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.4k 字
+    </span>
+  
 
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      10 分钟
+    </span>
+  
 
-<img class="wechat-title-img"
-     src="">
+  
+  
+</div>
 
+            
+          </div>
 
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>WkWebview 与 js 交互</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2018-09-13
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
+          
         </div>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            WkWebview 与 js 交互
-        </span>
-    </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近由于项目的原因，需要wkwebview 与 js 频繁的交互<br>主要有以下两种</p>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WkWebview 与 js 交互</h1>
+            
+            <div class="markdown-body">
+              <p>最近由于项目的原因，需要wkwebview 与 js 频繁的交互<br>主要有以下两种</p>
 <ul>
 <li>Content-Blocking Rules</li>
 <li>调用wkwebview 的js执行脚本的方法</li>
 <li>JS 调用 swift</li>
 </ul>
 <h3 id="一、Content-Blocking-Rules"><a href="#一、Content-Blocking-Rules" class="headerlink" title="一、Content-Blocking Rules"></a>一、Content-Blocking Rules</h3><p>如果是iOS11 之后的并且需求简单 wkwebview 提供了一个内容过滤规则的功能。可以简单处理一些操作。这个的好处是webview显示内容之前就可以处理。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> jsonString <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">[&#123;</span></span><br><span class="line"><span class="string">    &quot;trigger&quot;:&#123;</span></span><br><span class="line"><span class="string">        &quot;url-filter&quot;: &quot;.*&quot;,</span></span><br><span class="line"><span class="string">        &quot;resource-type&quot;:[&quot;document&quot;]</span></span><br><span class="line"><span class="string">    &#125;,</span></span><br><span class="line"><span class="string">    &quot;action&quot;:&#123;</span></span><br><span class="line"><span class="string">        &quot;type&quot;: &quot;css-display-none&quot;,</span></span><br><span class="line"><span class="string">        &quot;selector&quot;: &quot;.js-mp-info&quot;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&#125;]</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">if</span> <span class="keyword">#available</span>(<span class="keyword">iOS</span> <span class="number">11.0</span>, <span class="operator">*</span>) &#123;</span><br><span class="line">    <span class="type">WKContentRuleListStore</span>.default().compileContentRuleList(forIdentifier: <span class="string">&quot;demoRuleList&quot;</span>, encodedContentRuleList: jsonString) &#123; (list, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> contentRuleList <span class="operator">=</span> list <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">let</span> configuration <span class="operator">=</span> <span class="keyword">self</span>.webView.configuration</span><br><span class="line">        configuration.userContentController.add(contentRuleList)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> detailUrl <span class="operator">=</span> <span class="keyword">self</span>.detailUrl &#123;</span><br><span class="line">            <span class="keyword">self</span>.urlStr <span class="operator">=</span> detailUrl</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> jsonString <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">[&#123;</span><br><span class="hljs-string">    &quot;trigger&quot;:&#123;</span><br><span class="hljs-string">        &quot;url-filter&quot;: &quot;.*&quot;,</span><br><span class="hljs-string">        &quot;resource-type&quot;:[&quot;document&quot;]</span><br><span class="hljs-string">    &#125;,</span><br><span class="hljs-string">    &quot;action&quot;:&#123;</span><br><span class="hljs-string">        &quot;type&quot;: &quot;css-display-none&quot;,</span><br><span class="hljs-string">        &quot;selector&quot;: &quot;.js-mp-info&quot;</span><br><span class="hljs-string">    &#125;</span><br><span class="hljs-string">&#125;]</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-keyword">if</span> <span class="hljs-keyword">#available</span>(<span class="hljs-keyword">iOS</span> <span class="hljs-number">11.0</span>, <span class="hljs-operator">*</span>) &#123;<br>    <span class="hljs-type">WKContentRuleListStore</span>.default().compileContentRuleList(forIdentifier: <span class="hljs-string">&quot;demoRuleList&quot;</span>, encodedContentRuleList: jsonString) &#123; (list, error) <span class="hljs-keyword">in</span><br>        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> contentRuleList <span class="hljs-operator">=</span> list <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;<br>        <span class="hljs-keyword">let</span> configuration <span class="hljs-operator">=</span> <span class="hljs-keyword">self</span>.webView.configuration<br>        configuration.userContentController.add(contentRuleList)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> detailUrl <span class="hljs-operator">=</span> <span class="hljs-keyword">self</span>.detailUrl &#123;<br>            <span class="hljs-keyword">self</span>.urlStr <span class="hljs-operator">=</span> detailUrl<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>url-filter 可以用正则匹配url 是否触发规则过滤<br>resource-type 是适用资源类型</p>
 <ul>
 <li>document</li>
@@ -206,187 +271,208 @@
 </ul>
 <p><a target="_blank" rel="noopener" href="https://developer.apple.com/library/archive/documentation/Extensions/Conceptual/ContentBlockingRules/CreatingRules/CreatingRules.html"><strong>Content-Blocking Rules</strong> Apple官方文档使用说明</a></p>
 <h3 id="二、调用wkwebview-的js执行脚本的方法"><a href="#二、调用wkwebview-的js执行脚本的方法" class="headerlink" title="二、调用wkwebview 的js执行脚本的方法"></a>二、调用wkwebview 的js执行脚本的方法</h3><p>如果版本小于ios11，没有Content-Blocking Rules，或者规则不能满足需求。<br>也可以通过调用 <strong>wk.evaluateJavaScript</strong> 方法, 直接执行js。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> str <span class="operator">=</span> <span class="string">&quot;$(&#x27;.js-mp-info&#x27;).remove();&quot;</span></span><br><span class="line">webView.evaluateJavaScript(str, completionHandler: <span class="literal">nil</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;$(&#x27;.js-mp-info&#x27;).remove();&quot;</span><br>webView.evaluateJavaScript(str, completionHandler: <span class="hljs-literal">nil</span>)<br></code></pre></td></tr></table></figure>
 
 <p>JS代码除了直接写成string之外，也可以在另写在文件里，然后读取文件。<br>例如 JS相关代码写在 <strong>LoginJavaScript.js</strong> 文件里</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> jsHandler <span class="operator">=</span> <span class="string">&quot;&quot;</span></span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">    jsHandler <span class="operator">=</span> <span class="keyword">try</span> <span class="type">String</span>(contentsOf: <span class="type">Bundle</span>.main.url(forResource: <span class="string">&quot;LoginJavaScript&quot;</span>, withExtension: <span class="string">&quot;js&quot;</span>)<span class="operator">!</span>, encoding: <span class="type">String</span>.<span class="type">Encoding</span>.utf8)</span><br><span class="line">&#125; <span class="keyword">catch</span> &#123;&#125;</span><br><span class="line"><span class="keyword">let</span> wkScript <span class="operator">=</span> <span class="type">WKUserScript</span>.<span class="keyword">init</span>(source: jsHandler,</span><br><span class="line">                                  injectionTime: <span class="type">WKUserScriptInjectionTime</span>.atDocumentEnd,</span><br><span class="line">                                  forMainFrameOnly: <span class="literal">true</span>)</span><br><span class="line">config.userContentController.addUserScript(wkScript)</span><br><span class="line"><span class="keyword">let</span> wk <span class="operator">=</span> <span class="type">WKWebView</span>.<span class="keyword">init</span>(frame: .zero, configuration: config)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> jsHandler <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span><br><span class="hljs-keyword">do</span> &#123;<br>    jsHandler <span class="hljs-operator">=</span> <span class="hljs-keyword">try</span> <span class="hljs-type">String</span>(contentsOf: <span class="hljs-type">Bundle</span>.main.url(forResource: <span class="hljs-string">&quot;LoginJavaScript&quot;</span>, withExtension: <span class="hljs-string">&quot;js&quot;</span>)<span class="hljs-operator">!</span>, encoding: <span class="hljs-type">String</span>.<span class="hljs-type">Encoding</span>.utf8)<br>&#125; <span class="hljs-keyword">catch</span> &#123;&#125;<br><span class="hljs-keyword">let</span> wkScript <span class="hljs-operator">=</span> <span class="hljs-type">WKUserScript</span>.<span class="hljs-keyword">init</span>(source: jsHandler,<br>                                  injectionTime: <span class="hljs-type">WKUserScriptInjectionTime</span>.atDocumentEnd,<br>                                  forMainFrameOnly: <span class="hljs-literal">true</span>)<br>config.userContentController.addUserScript(wkScript)<br><span class="hljs-keyword">let</span> wk <span class="hljs-operator">=</span> <span class="hljs-type">WKWebView</span>.<span class="hljs-keyword">init</span>(frame: .zero, configuration: config)<br></code></pre></td></tr></table></figure>
 
 <h3 id="三、JS-调用-swift"><a href="#三、JS-调用-swift" class="headerlink" title="三、JS 调用 swift"></a>三、JS 调用 swift</h3><h4 id="预定义"><a href="#预定义" class="headerlink" title="预定义"></a>预定义</h4><p>wkwebview的 config 可以事先定义一些事件</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> config <span class="operator">=</span> <span class="type">WKWebViewConfiguration</span>()</span><br><span class="line">config.userContentController.add(<span class="keyword">self</span>, name: <span class="string">&quot;eventOne&quot;</span>)</span><br><span class="line">config.userContentController.add(<span class="keyword">self</span>, name: <span class="string">&quot;eventTwo&quot;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> config <span class="hljs-operator">=</span> <span class="hljs-type">WKWebViewConfiguration</span>()<br>config.userContentController.add(<span class="hljs-keyword">self</span>, name: <span class="hljs-string">&quot;eventOne&quot;</span>)<br>config.userContentController.add(<span class="hljs-keyword">self</span>, name: <span class="hljs-string">&quot;eventTwo&quot;</span>)<br></code></pre></td></tr></table></figure>
 
 <h4 id="JS调用"><a href="#JS调用" class="headerlink" title="JS调用"></a>JS调用</h4><p>然后在JS 脚本里面调用</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webkit.messageHandlers.eventOne.postMessage(message);</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs JavaScript">webkit.messageHandlers.eventOne.postMessage(message);<br></code></pre></td></tr></table></figure>
 <p>其中 <strong>eventOne</strong> 就是之前事先定义好的事件名字。<br><strong>message</strong> 就是 js 向 swift 传递的信息</p>
 <h4 id="Swift-代理方法监听"><a href="#Swift-代理方法监听" class="headerlink" title="Swift 代理方法监听"></a>Swift 代理方法监听</h4><p>实现 <strong>WKScriptMessageHandler</strong> 下的一个代理方法，在方法里面监测到JS触发的预定义的事件</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">userContentController</span>(<span class="keyword">_</span> <span class="params">userContentController</span>: <span class="type">WKUserContentController</span>, <span class="params">didReceive</span> <span class="params">message</span>: <span class="type">WKScriptMessage</span>)</span> &#123;</span><br><span class="line">  <span class="keyword">switch</span> message.name &#123;</span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;eventOne&quot;</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&quot;eventOne&quot;</span>)</span><br><span class="line">      <span class="built_in">print</span>(message.body)<span class="comment">//js传来的信息</span></span><br><span class="line">  <span class="keyword">case</span> <span class="string">&quot;eventTwo&quot;</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&quot;eventTwo&quot;</span>)</span><br><span class="line">  <span class="keyword">default</span>:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&quot;none&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/09/13/wkwebview/" data-toggle="tooltip" data-placement="top"
-                           title="WkWebview与其他组件混排">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/09/12/ios-constraints/" data-toggle="tooltip" data-placement="top"
-                           title="iOS约束冲突警告解决办法">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">userContentController</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">userContentController</span>: <span class="hljs-type">WKUserContentController</span>, <span class="hljs-params">didReceive</span> <span class="hljs-params">message</span>: <span class="hljs-type">WKScriptMessage</span>)</span> &#123;<br>  <span class="hljs-keyword">switch</span> message.name &#123;<br>  <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;eventOne&quot;</span>:<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;eventOne&quot;</span>)<br>      <span class="hljs-built_in">print</span>(message.body)<span class="hljs-comment">//js传来的信息</span><br>  <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;eventTwo&quot;</span>:<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;eventTwo&quot;</span>)<br>  <span class="hljs-keyword">default</span>:<br>      <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;none&quot;</span>)<br>  &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
             </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81Content-Blocking-Rules"><span class="toc-text">一、Content-Blocking Rules</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%B0%83%E7%94%A8wkwebview-%E7%9A%84js%E6%89%A7%E8%A1%8C%E8%84%9A%E6%9C%AC%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">二、调用wkwebview 的js执行脚本的方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81JS-%E8%B0%83%E7%94%A8-swift"><span class="toc-text">三、JS 调用 swift</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E5%AE%9A%E4%B9%89"><span class="toc-text">预定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#JS%E8%B0%83%E7%94%A8"><span class="toc-text">JS调用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Swift-%E4%BB%A3%E7%90%86%E6%96%B9%E6%B3%95%E7%9B%91%E5%90%AC"><span class="toc-text">Swift 代理方法监听</span></a></li></ol></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
                 
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
                 </p>
-
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/13/wkwebview/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">WkWebview与其他组件混排</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/12/ios-constraints/">
+                        <span class="hidden-mobile">iOS约束冲突警告解决办法</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
+
+            
+          </article>
         </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<!-- jQuery -->
 
-<script src="/js/jquery.min.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-</script>
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-<!-- Google Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-<!-- Baidu Tongji -->
+  
 
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','','2.0.0');
-</script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
 </html>

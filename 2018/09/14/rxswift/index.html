@@ -1,177 +1,242 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" data-default-color-scheme=auto>
 
-<!-- Head tag -->
+
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        RXSwift｜undefined
-        
-    </title>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/J.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="我心中有猛虎，细嗅蔷薇">
+  <meta name="author" content="Jemesl Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="最近新的项目采用了rxswift + mvvm 来写。网络框架用的moya 的rxswift版。 总的体验来说，mvvm架构中，确定体会到了把数据逻辑剥离出来并且方便复用的便利。采用了响应式编程理念，用了rxswift。在某些场景下，rxswift 的体验非常好.不过现在也造成了在问题追踪上会比较麻烦。 这几个月当中也是踩了不少坑，结合实际开发简单说说rxswift的一些实际运用。 实际应用当中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RXSwift">
+<meta property="og:url" content="http://jemesl.github.io/2018/09/14/rxswift/index.html">
+<meta property="og:site_name" content="Jemesl&#39;s blogs">
+<meta property="og:description" content="最近新的项目采用了rxswift + mvvm 来写。网络框架用的moya 的rxswift版。 总的体验来说，mvvm架构中，确定体会到了把数据逻辑剥离出来并且方便复用的便利。采用了响应式编程理念，用了rxswift。在某些场景下，rxswift 的体验非常好.不过现在也造成了在问题追踪上会比较麻烦。 这几个月当中也是踩了不少坑，结合实际开发简单说说rxswift的一些实际运用。 实际应用当中的">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-14T03:40:14.000Z">
+<meta property="article:modified_time" content="2019-10-30T03:02:09.000Z">
+<meta property="article:author" content="Jemesl Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>RXSwift - Jemesl&#39;s blogs</title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/14/rxswift/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
-    <!-- Bootstrap Core CSS -->
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
     
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
-<link rel="stylesheet" href="/css/syntax.css">
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jemesl.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    我心中有猛虎，细嗅蔷薇
-                </span>
-                's Blog
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jemesl</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="RXSwift">
+              
+            </span>
 
-<!-- Main Content -->
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-14 11:40" pubdate>
+        September 14, 2018 am
+      </time>
+    </span>
+  
+</div>
 
-<!--only post-->
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.2k 字
+    </span>
+  
 
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      13 分钟
+    </span>
+  
 
-<img class="wechat-title-img"
-     src="">
+  
+  
+</div>
 
+            
+          </div>
 
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>RXSwift</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2018-09-14
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
+          
         </div>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            RXSwift
-        </span>
-    </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近新的项目采用了rxswift + mvvm 来写。<br>网络框架用的moya 的rxswift版。</p>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RXSwift</h1>
+            
+            <div class="markdown-body">
+              <p>最近新的项目采用了rxswift + mvvm 来写。<br>网络框架用的moya 的rxswift版。</p>
 <p>总的体验来说，mvvm架构中，确定体会到了把数据逻辑剥离出来并且方便复用的便利。<br>采用了响应式编程理念，用了rxswift。在某些场景下，rxswift 的体验非常好.<br>不过现在也造成了在问题追踪上会比较麻烦。</p>
 <p>这几个月当中也是踩了不少坑，结合实际开发简单说说rxswift的一些实际运用。</p>
 <h3 id="实际应用当中的一些使用场景"><a href="#实际应用当中的一些使用场景" class="headerlink" title="实际应用当中的一些使用场景"></a>实际应用当中的一些使用场景</h3><h4 id="1-简化tableview等数据绑定流程"><a href="#1-简化tableview等数据绑定流程" class="headerlink" title="1. 简化tableview等数据绑定流程"></a>1. 简化tableview等数据绑定流程</h4><p>结合 RXDataSource 简化 tableview、collectionview 等的数据绑定</p>
@@ -179,19 +244,19 @@
 <h4 id="3-同步状态信息"><a href="#3-同步状态信息" class="headerlink" title="3. 同步状态信息"></a>3. 同步状态信息</h4><p>类似很多页面出现相同的数据列表，列表还会展示状态信息，比如点赞、收藏等。<br>这些状态信息同步可以通过发送事件，在所有相关列表订阅这个事件，然后处理改变各自列表的状态</p>
 <h3 id="rxswift学习笔记"><a href="#rxswift学习笔记" class="headerlink" title="rxswift学习笔记"></a>rxswift学习笔记</h3><p>写的并不全，主要是对一些常用的地方做个简单的记录</p>
 <h4 id="1-share-replay-scope"><a href="#1-share-replay-scope" class="headerlink" title="1. share(replay:scope:)"></a>1. <strong>share(replay:scope:)</strong></h4><p>在某些情况下，可能会对Observer 进行多次订阅，如下</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ob <span class="operator">=</span> <span class="type">Observable</span>.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).map &#123; <span class="built_in">print</span>(<span class="variable">$0</span>) &#125;.share(replay: <span class="number">1</span>, scope: .forever)</span><br><span class="line">ob.subscribe(onNext: &#123; res <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;first sub&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ob.subscribe(onNext: &#123; res <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;second sub&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> ob <span class="hljs-operator">=</span> <span class="hljs-type">Observable</span>.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>).map &#123; <span class="hljs-built_in">print</span>(<span class="hljs-variable">$0</span>) &#125;.share(replay: <span class="hljs-number">1</span>, scope: .forever)<br>ob.subscribe(onNext: &#123; res <span class="hljs-keyword">in</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;first sub&quot;</span>)<br>&#125;)<br><br>ob.subscribe(onNext: &#123; res <span class="hljs-keyword">in</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;second sub&quot;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 <p>执行结果如下，多次订阅会将整个链式多次执行，但大多数情况下只希望map 只执行一次，比如map里面可能是网络请求等等。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">first sub</span><br><span class="line">1</span><br><span class="line">second sub</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-number">1</span><br><span class="hljs-keyword">first</span> sub<br><span class="hljs-number">1</span><br><span class="hljs-keyword">second</span> sub<br></code></pre></td></tr></table></figure>
 <p>可以在map后面添加share</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ob <span class="operator">=</span> <span class="type">Observable</span>.of(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>).map &#123; <span class="built_in">print</span>(<span class="variable">$0</span>) &#125;.share(replay: <span class="number">1</span>, scope: .forever)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> ob <span class="hljs-operator">=</span> <span class="hljs-type">Observable</span>.of(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>).map &#123; <span class="hljs-built_in">print</span>(<span class="hljs-variable">$0</span>) &#125;.share(replay: <span class="hljs-number">1</span>, scope: .forever)<br></code></pre></td></tr></table></figure>
 <p>现在链式只执行了一次</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1</span><br><span class="line">first sub</span><br><span class="line">second sub</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs applescript"><span class="hljs-number">1</span><br><span class="hljs-keyword">first</span> sub<br><span class="hljs-keyword">second</span> sub<br></code></pre></td></tr></table></figure>
 <h4 id="2-retry"><a href="#2-retry" class="headerlink" title="2. retry"></a>2. <strong>retry</strong></h4><p>当遇到error 时，会重新订阅该序列<br>retry(2)里面数字代表重试次数，默认1次</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">enum MyError: Error &#123;</span><br><span class="line">    case A</span><br><span class="line">    case B</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var count = 1</span><br><span class="line">let sequenceThatErrors = Observable&lt;String&gt;.create &#123; observer in</span><br><span class="line">    observer.onNext(&quot;a&quot;)</span><br><span class="line">    observer.onNext(&quot;b&quot;)</span><br><span class="line"></span><br><span class="line">    //让第一个订阅时发生错误</span><br><span class="line">    if count == 1 &#123;</span><br><span class="line">        observer.onError(MyError.A)</span><br><span class="line">        print(&quot;Error encountered&quot;)</span><br><span class="line">        count += 1</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    observer.onNext(&quot;c&quot;)</span><br><span class="line">    observer.onNext(&quot;d&quot;)</span><br><span class="line">    observer.onCompleted()</span><br><span class="line"></span><br><span class="line">    return Disposables.create()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sequenceThatErrors</span><br><span class="line">    .retry(2)  //重试2次（参数为空则只重试一次）</span><br><span class="line">    .subscribe(onNext: &#123; print($0) &#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs axapta"><span class="hljs-built_in">enum</span> MyError: Error &#123;<br>    <span class="hljs-keyword">case</span> A<br>    <span class="hljs-keyword">case</span> B<br>&#125;<br><br><span class="hljs-built_in">var</span> <span class="hljs-keyword">count</span> = <span class="hljs-number">1</span><br>let sequenceThatErrors = Observable&lt;String&gt;.create &#123; observer <span class="hljs-keyword">in</span><br>    observer.onNext(<span class="hljs-string">&quot;a&quot;</span>)<br>    observer.onNext(<span class="hljs-string">&quot;b&quot;</span>)<br><br>    <span class="hljs-comment">//让第一个订阅时发生错误</span><br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">count</span> == <span class="hljs-number">1</span> &#123;<br>        observer.onError(MyError.A)<br>        <span class="hljs-keyword">print</span>(<span class="hljs-string">&quot;Error encountered&quot;</span>)<br>        <span class="hljs-keyword">count</span> += <span class="hljs-number">1</span><br>    &#125;<br><br>    observer.onNext(<span class="hljs-string">&quot;c&quot;</span>)<br>    observer.onNext(<span class="hljs-string">&quot;d&quot;</span>)<br>    observer.onCompleted()<br><br>    <span class="hljs-keyword">return</span> Disposables.create()<br>&#125;<br><br>sequenceThatErrors<br>    .<span class="hljs-keyword">retry</span>(<span class="hljs-number">2</span>)  <span class="hljs-comment">//重试2次（参数为空则只重试一次）</span><br>    .subscribe(onNext: &#123; <span class="hljs-keyword">print</span>($<span class="hljs-number">0</span>) &#125;)<br><br></code></pre></td></tr></table></figure>
 <h4 id="3-debug"><a href="#3-debug" class="headerlink" title="3. debug"></a>3. <strong>debug</strong></h4><p>可以打印相关信息，方便调试<br>多个debug时，添加字符串予以区分：debug(“调试”)</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ob <span class="operator">=</span> <span class="type">Observable</span>.of(<span class="number">1</span>).map &#123; <span class="built_in">print</span>(<span class="variable">$0</span>) &#125;.share(replay: <span class="number">1</span>, scope: .forever                    )</span><br><span class="line">ob.debug(<span class="string">&quot;frist&quot;</span>).subscribe(onNext: &#123; res <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;first sub&quot;</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">ob.debug(<span class="string">&quot;second&quot;</span>).subscribe(onNext: &#123; res <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;second sub&quot;</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> ob <span class="hljs-operator">=</span> <span class="hljs-type">Observable</span>.of(<span class="hljs-number">1</span>).map &#123; <span class="hljs-built_in">print</span>(<span class="hljs-variable">$0</span>) &#125;.share(replay: <span class="hljs-number">1</span>, scope: .forever                    )<br>ob.debug(<span class="hljs-string">&quot;frist&quot;</span>).subscribe(onNext: &#123; res <span class="hljs-keyword">in</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;first sub&quot;</span>)<br>&#125;)<br><br>ob.debug(<span class="hljs-string">&quot;second&quot;</span>).subscribe(onNext: &#123; res <span class="hljs-keyword">in</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;second sub&quot;</span>)<br>&#125;)<br></code></pre></td></tr></table></figure>
 <p>打印：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">2018-12-24 15:07:29.612: frist -&gt; subscribed</span><br><span class="line">1</span><br><span class="line">2018-12-24 15:07:29.614: frist -&gt; Event next(())</span><br><span class="line">first sub</span><br><span class="line">2018-12-24 15:07:29.614: frist -&gt; Event completed</span><br><span class="line">2018-12-24 15:07:29.614: frist -&gt; isDisposed</span><br><span class="line">2018-12-24 15:07:29.655: second -&gt; subscribed</span><br><span class="line">2018-12-24 15:07:29.656: second -&gt; Event next(())</span><br><span class="line">second sub</span><br><span class="line">2018-12-24 15:07:29.656: second -&gt; Event completed</span><br><span class="line">2018-12-24 15:07:29.656: second -&gt; isDisposed</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">612</span>: frist -&gt; subscribed<br><span class="hljs-attribute">1</span><br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">614</span>: frist -&gt; Event next(())<br><span class="hljs-attribute">first</span> sub<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">614</span>: frist -&gt; Event completed<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">614</span>: frist -&gt; isDisposed<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">655</span>: second -&gt; subscribed<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">656</span>: second -&gt; Event next(())<br><span class="hljs-attribute">second</span> sub<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">656</span>: second -&gt; Event completed<br><span class="hljs-attribute">2018</span>-<span class="hljs-number">12</span>-<span class="hljs-number">24</span> <span class="hljs-number">15</span>:<span class="hljs-number">07</span>:<span class="hljs-number">29</span>.<span class="hljs-number">656</span>: second -&gt; isDisposed<br></code></pre></td></tr></table></figure>
 
 <h4 id="4-Single"><a href="#4-Single" class="headerlink" title="4. Single"></a>4. <strong>Single</strong></h4><p>Single 是 Observable 的另外一个版本。但它不像 Observable 可以发出多个元素，它要么只能发出一个元素，要么产生一个 error 事件。</p>
 <ul>
@@ -212,8 +277,8 @@
 <li>最普通的subject，不需要初始值就能创建</li>
 <li>只能收到订阅之后的event，无法收到旧的 event</li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s <span class="operator">=</span> <span class="type">PublishSubject</span>&lt;<span class="type">String</span>&gt;()</span><br><span class="line">s.onNext(<span class="string">&quot;first&quot;</span>)</span><br><span class="line">s.subscribe(onNext: &#123; s <span class="keyword">in</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;sub <span class="subst">\(s)</span>&quot;</span>)</span><br><span class="line">&#125;).disposed(by: disposeBag)</span><br><span class="line">s.onNext(<span class="string">&quot;second&quot;</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sub second</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> s <span class="hljs-operator">=</span> <span class="hljs-type">PublishSubject</span>&lt;<span class="hljs-type">String</span>&gt;()<br>s.onNext(<span class="hljs-string">&quot;first&quot;</span>)<br>s.subscribe(onNext: &#123; s <span class="hljs-keyword">in</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;sub <span class="hljs-subst">\(s)</span>&quot;</span>)<br>&#125;).disposed(by: disposeBag)<br>s.onNext(<span class="hljs-string">&quot;second&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">sub <span class="hljs-keyword">second</span><br></code></pre></td></tr></table></figure>
 
 <ol start="2">
 <li><strong>BehaviorSubject</strong></li>
@@ -254,7 +319,7 @@
 </ul>
 <h4 id="7-flatMap"><a href="#7-flatMap" class="headerlink" title="7. flatMap"></a>7. <strong>flatMap</strong></h4><ul>
 <li>flatMap 会对每一个元素应用一个转换方法，转换成一个 Observable，等于是变成一个Observables的序列，然后再对Observables的元素合并之后再发出来，等于又将其降维成一个Observable</li>
-<li>这个用处很大，如果一个Observable 的元素同样也是一个Observable时，利用flatMap可以将其元素都发送出来。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> subject1 <span class="operator">=</span> <span class="type">BehaviorSubject</span>(value: <span class="string">&quot;A&quot;</span>)</span><br><span class="line"><span class="keyword">let</span> subject2 <span class="operator">=</span> <span class="type">BehaviorSubject</span>(value: <span class="string">&quot;1&quot;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> variable <span class="operator">=</span> <span class="type">Variable</span>(subject1)</span><br><span class="line"> </span><br><span class="line">variable.asObservable()</span><br><span class="line">    .flatMap &#123; <span class="variable">$0</span> &#125;</span><br><span class="line">    .subscribe(onNext: &#123; <span class="built_in">print</span>(<span class="variable">$0</span>) &#125;)</span><br><span class="line"> </span><br><span class="line">subject1.onNext(<span class="string">&quot;B&quot;</span>)</span><br><span class="line">variable.value <span class="operator">=</span> subject2</span><br><span class="line">subject2.onNext(<span class="string">&quot;2&quot;</span>)</span><br><span class="line">subject1.onNext(<span class="string">&quot;C&quot;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>这个用处很大，如果一个Observable 的元素同样也是一个Observable时，利用flatMap可以将其元素都发送出来。<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> subject1 <span class="hljs-operator">=</span> <span class="hljs-type">BehaviorSubject</span>(value: <span class="hljs-string">&quot;A&quot;</span>)<br><span class="hljs-keyword">let</span> subject2 <span class="hljs-operator">=</span> <span class="hljs-type">BehaviorSubject</span>(value: <span class="hljs-string">&quot;1&quot;</span>)<br> <br><span class="hljs-keyword">let</span> variable <span class="hljs-operator">=</span> <span class="hljs-type">Variable</span>(subject1)<br> <br>variable.asObservable()<br>    .flatMap &#123; <span class="hljs-variable">$0</span> &#125;<br>    .subscribe(onNext: &#123; <span class="hljs-built_in">print</span>(<span class="hljs-variable">$0</span>) &#125;)<br> <br>subject1.onNext(<span class="hljs-string">&quot;B&quot;</span>)<br>variable.value <span class="hljs-operator">=</span> subject2<br>subject2.onNext(<span class="hljs-string">&quot;2&quot;</span>)<br>subject1.onNext(<span class="hljs-string">&quot;C&quot;</span>)<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h4 id="8-ControlProperty"><a href="#8-ControlProperty" class="headerlink" title="8. ControlProperty"></a>8. <strong>ControlProperty</strong></h4><p>ControlProperty 是专门用来描述UI控件属性，拥有该类型的属性都是被观察者Observable<br>有一下特征：</p>
 <ul>
@@ -270,174 +335,195 @@
 <li>共享状态变化</li>
 </ul>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/09/20/runloop/" data-toggle="tooltip" data-placement="top"
-                           title="runloop">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/09/13/wkwebview/" data-toggle="tooltip" data-placement="top"
-                           title="WkWebview与其他组件混排">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
             </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8%E5%BD%93%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">实际应用当中的一些使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%AE%80%E5%8C%96tableview%E7%AD%89%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A%E6%B5%81%E7%A8%8B"><span class="toc-text">1. 简化tableview等数据绑定流程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%AE%80%E5%8C%96%E5%A4%8D%E6%9D%82%E9%A1%B5%E9%9D%A2%E5%A4%9A%E7%8A%B6%E6%80%81%E9%97%B4%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-text">2. 简化复杂页面多状态间的逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%90%8C%E6%AD%A5%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="toc-text">3. 同步状态信息</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#rxswift%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">rxswift学习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-share-replay-scope"><span class="toc-text">1. share(replay:scope:)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-retry"><span class="toc-text">2. retry</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-debug"><span class="toc-text">3. debug</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Single"><span class="toc-text">4. Single</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-Subjects"><span class="toc-text">5. Subjects</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-drive"><span class="toc-text">6. drive</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-flatMap"><span class="toc-text">7. flatMap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-ControlProperty"><span class="toc-text">8. ControlProperty</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-ControlEvent"><span class="toc-text">9. ControlEvent</span></a></li></ol></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
                 
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
                 </p>
-
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/20/runloop/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">runloop</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/13/wkwebview/">
+                        <span class="hidden-mobile">WkWebview与其他组件混排</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
+
+            
+          </article>
         </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<!-- jQuery -->
 
-<script src="/js/jquery.min.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-</script>
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-<!-- Google Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-<!-- Baidu Tongji -->
+  
 
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','','2.0.0');
-</script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
 </html>

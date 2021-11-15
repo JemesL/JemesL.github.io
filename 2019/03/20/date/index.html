@@ -1,364 +1,450 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" data-default-color-scheme=auto>
 
-<!-- Head tag -->
+
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        Swift 时间格式处理｜undefined
-        
-    </title>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/J.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="我心中有猛虎，细嗅蔷薇">
+  <meta name="author" content="Jemesl Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="1. String -&gt; Date有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效 1234567891011121314extension String &amp;#123;    &#x2F;&#x2F;&#x2F; String -&gt; Date    &#x2F;&#x2F;&#x2F;    &#x2F;&#x2F;&#x2F; - Parameters:    &#x2F;&#x2F;&#x2F;   - format: 原时间字符串的格式    &#x2F;&#x2F;&#x2F;   - ti">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 时间格式处理">
+<meta property="og:url" content="http://jemesl.github.io/2019/03/20/date/index.html">
+<meta property="og:site_name" content="Jemesl&#39;s blogs">
+<meta property="og:description" content="1. String -&gt; Date有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效 1234567891011121314extension String &amp;#123;    &#x2F;&#x2F;&#x2F; String -&gt; Date    &#x2F;&#x2F;&#x2F;    &#x2F;&#x2F;&#x2F; - Parameters:    &#x2F;&#x2F;&#x2F;   - format: 原时间字符串的格式    &#x2F;&#x2F;&#x2F;   - ti">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-03-20T12:46:31.000Z">
+<meta property="article:modified_time" content="2019-10-30T03:02:09.000Z">
+<meta property="article:author" content="Jemesl Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>Swift 时间格式处理 - Jemesl&#39;s blogs</title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2019/03/20/date/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
-    <!-- Bootstrap Core CSS -->
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
     
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
-<link rel="stylesheet" href="/css/syntax.css">
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jemesl.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    我心中有猛虎，细嗅蔷薇
-                </span>
-                's Blog
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jemesl</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Swift 时间格式处理">
+              
+            </span>
 
-<!-- Main Content -->
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2019-03-20 20:46" pubdate>
+        March 20, 2019 pm
+      </time>
+    </span>
+  
+</div>
 
-<!--only post-->
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
 
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      8 分钟
+    </span>
+  
 
-<img class="wechat-title-img"
-     src="">
+  
+  
+</div>
 
+            
+          </div>
 
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>Swift 时间格式处理</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2019-03-20
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
+          
         </div>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            Swift 时间格式处理
-        </span>
-    </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h4 id="1-String-gt-Date"><a href="#1-String-gt-Date" class="headerlink" title="1. String -&gt; Date"></a>1. String -&gt; Date</h4><p>有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// String -&gt; Date</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// - Parameters:</span></span><br><span class="line">    <span class="comment">///   - format: 原时间字符串的格式</span></span><br><span class="line">    <span class="comment">///   - timeZone: 该字符串的时区(若字符串自带时区信息, 则该设置无效), default: 当前时区</span></span><br><span class="line">    <span class="comment">/// - Returns: Date</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">toDate</span>(<span class="params">format</span>: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.SSSZ&quot;</span>, <span class="params">timeZone</span>: <span class="type">TimeZone</span>? <span class="operator">=</span> .current)</span> -&gt; <span class="type">Date</span>? &#123;</span><br><span class="line">        <span class="keyword">let</span> formatter <span class="operator">=</span> <span class="type">DateFormatter</span>()</span><br><span class="line">        formatter.timeZone <span class="operator">=</span> timeZone</span><br><span class="line">        formatter.dateFormat <span class="operator">=</span> format</span><br><span class="line">        <span class="keyword">return</span> formatter.date(from: <span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Swift 时间格式处理</h1>
+            
+            <div class="markdown-body">
+              <h4 id="1-String-gt-Date"><a href="#1-String-gt-Date" class="headerlink" title="1. String -&gt; Date"></a>1. String -&gt; Date</h4><p>有一个需要注意的是如果字符串里面包含了时区信息, 那么设置 TimeZone 无效</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">String</span> </span>&#123;<br>    <span class="hljs-comment">/// String -&gt; Date</span><br>    <span class="hljs-comment">///</span><br>    <span class="hljs-comment">/// - Parameters:</span><br>    <span class="hljs-comment">///   - format: 原时间字符串的格式</span><br>    <span class="hljs-comment">///   - timeZone: 该字符串的时区(若字符串自带时区信息, 则该设置无效), default: 当前时区</span><br>    <span class="hljs-comment">/// - Returns: Date</span><br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">toDate</span>(<span class="hljs-params">format</span>: <span class="hljs-type">String</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;yyyy-MM-dd&#x27;T&#x27;HH:mm:ss.SSSZ&quot;</span>, <span class="hljs-params">timeZone</span>: <span class="hljs-type">TimeZone</span>? <span class="hljs-operator">=</span> .current)</span> -&gt; <span class="hljs-type">Date</span>? &#123;<br>        <span class="hljs-keyword">let</span> formatter <span class="hljs-operator">=</span> <span class="hljs-type">DateFormatter</span>()<br>        formatter.timeZone <span class="hljs-operator">=</span> timeZone<br>        formatter.dateFormat <span class="hljs-operator">=</span> format<br>        <span class="hljs-keyword">return</span> formatter.date(from: <span class="hljs-keyword">self</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>如下 无论时区设置成什么, 结果都一样</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str1 <span class="operator">=</span> <span class="string">&quot;2019-03-20T09:48:55.801Z&quot;</span></span><br><span class="line"><span class="comment">// 东八区</span></span><br><span class="line"><span class="keyword">let</span> date11 <span class="operator">=</span> str1.toDate(timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">28800</span>)) <span class="comment">//&quot;Mar 20, 2019 at 5:48 PM&quot;</span></span><br><span class="line"><span class="comment">// 零时区</span></span><br><span class="line"><span class="keyword">let</span> date12 <span class="operator">=</span> str1.toDate(timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">0</span>))     <span class="comment">//&quot;Mar 20, 2019 at 5:48 PM&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> str1 <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-03-20T09:48:55.801Z&quot;</span><br><span class="hljs-comment">// 东八区</span><br><span class="hljs-keyword">let</span> date11 <span class="hljs-operator">=</span> str1.toDate(timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">28800</span>)) <span class="hljs-comment">//&quot;Mar 20, 2019 at 5:48 PM&quot;</span><br><span class="hljs-comment">// 零时区</span><br><span class="hljs-keyword">let</span> date12 <span class="hljs-operator">=</span> str1.toDate(timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">0</span>))     <span class="hljs-comment">//&quot;Mar 20, 2019 at 5:48 PM&quot;</span><br></code></pre></td></tr></table></figure>
 
 
 <p>不包含时区信息时, 这时候时区不同是有影响的</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str2 <span class="operator">=</span> <span class="string">&quot;2019-03-20 20:48:55&quot;</span></span><br><span class="line"><span class="comment">// 东八区</span></span><br><span class="line"><span class="keyword">let</span> date21 <span class="operator">=</span> str2.toDate(format: <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">28800</span>)) <span class="comment">//&quot;Mar 20, 2019 at 8:48 PM&quot;</span></span><br><span class="line"><span class="comment">// 零时区</span></span><br><span class="line"><span class="keyword">let</span> date22 <span class="operator">=</span> str2.toDate(format: <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">0</span>))     <span class="comment">//&quot;Mar 21, 2019 at 4:48 AM&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">var</span> str2 <span class="hljs-operator">=</span> <span class="hljs-string">&quot;2019-03-20 20:48:55&quot;</span><br><span class="hljs-comment">// 东八区</span><br><span class="hljs-keyword">let</span> date21 <span class="hljs-operator">=</span> str2.toDate(format: <span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">28800</span>)) <span class="hljs-comment">//&quot;Mar 20, 2019 at 8:48 PM&quot;</span><br><span class="hljs-comment">// 零时区</span><br><span class="hljs-keyword">let</span> date22 <span class="hljs-operator">=</span> str2.toDate(format: <span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">0</span>))     <span class="hljs-comment">//&quot;Mar 21, 2019 at 4:48 AM&quot;</span><br></code></pre></td></tr></table></figure>
 
 
 <h4 id="2-Date-gt-String"><a href="#2-Date-gt-String" class="headerlink" title="2. Date -&gt; String"></a>2. Date -&gt; String</h4><p>此时, 设置 timeZone 将会把时间转成时区当地时间并按格式展示</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Date</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Date -&gt; String</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// - Parameter</span></span><br><span class="line">    <span class="comment">///   - format: 需要转为的时间格式</span></span><br><span class="line">    <span class="comment">///   - timeZone: 展示的时间时区, default: 当前时区</span></span><br><span class="line">    <span class="comment">/// - Returns: String</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">toString</span>(<span class="params">format</span>: <span class="type">String</span> <span class="operator">=</span> <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, <span class="params">timeZone</span>: <span class="type">TimeZone</span>? <span class="operator">=</span> .current)</span> -&gt; <span class="type">String</span> &#123;</span><br><span class="line">        <span class="type">NSTimeZone</span>.resetSystemTimeZone()</span><br><span class="line">        <span class="keyword">let</span> formatter <span class="operator">=</span> <span class="type">DateFormatter</span>()</span><br><span class="line">        formatter.timeZone <span class="operator">=</span> timeZone</span><br><span class="line">        formatter.dateFormat <span class="operator">=</span> format</span><br><span class="line"></span><br><span class="line">        formatter.locale <span class="operator">=</span> <span class="type">Locale</span>(identifier: <span class="string">&quot;zh_CN&quot;</span>)</span><br><span class="line">        <span class="keyword">return</span> formatter.string(from: <span class="keyword">self</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-class"><span class="hljs-keyword">extension</span> <span class="hljs-title">Date</span> </span>&#123;<br>    <span class="hljs-comment">/// Date -&gt; String</span><br>    <span class="hljs-comment">///</span><br>    <span class="hljs-comment">/// - Parameter</span><br>    <span class="hljs-comment">///   - format: 需要转为的时间格式</span><br>    <span class="hljs-comment">///   - timeZone: 展示的时间时区, default: 当前时区</span><br>    <span class="hljs-comment">/// - Returns: String</span><br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">toString</span>(<span class="hljs-params">format</span>: <span class="hljs-type">String</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, <span class="hljs-params">timeZone</span>: <span class="hljs-type">TimeZone</span>? <span class="hljs-operator">=</span> .current)</span> -&gt; <span class="hljs-type">String</span> &#123;<br>        <span class="hljs-type">NSTimeZone</span>.resetSystemTimeZone()<br>        <span class="hljs-keyword">let</span> formatter <span class="hljs-operator">=</span> <span class="hljs-type">DateFormatter</span>()<br>        formatter.timeZone <span class="hljs-operator">=</span> timeZone<br>        formatter.dateFormat <span class="hljs-operator">=</span> format<br><br>        formatter.locale <span class="hljs-operator">=</span> <span class="hljs-type">Locale</span>(identifier: <span class="hljs-string">&quot;zh_CN&quot;</span>)<br>        <span class="hljs-keyword">return</span> formatter.string(from: <span class="hljs-keyword">self</span>)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>如下:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 零时区</span></span><br><span class="line">date3<span class="operator">?</span>.toString(format: <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">0</span>))     <span class="comment">//&quot;2019-03-20 12:48:55&quot;</span></span><br><span class="line"><span class="comment">// 东八区</span></span><br><span class="line">date3<span class="operator">?</span>.toString(format: <span class="string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="type">TimeZone</span>(secondsFromGMT: <span class="number">28800</span>)) <span class="comment">//&quot;2019-03-20 20:48:55&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-comment">// 零时区</span><br>date3<span class="hljs-operator">?</span>.toString(format: <span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">0</span>))     <span class="hljs-comment">//&quot;2019-03-20 12:48:55&quot;</span><br><span class="hljs-comment">// 东八区</span><br>date3<span class="hljs-operator">?</span>.toString(format: <span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span>, timeZone: <span class="hljs-type">TimeZone</span>(secondsFromGMT: <span class="hljs-number">28800</span>)) <span class="hljs-comment">//&quot;2019-03-20 20:48:55&quot;</span><br></code></pre></td></tr></table></figure>
 
-<h4 id="3-Date-gt-String-类似朋友圈的时间格式"><a href="#3-Date-gt-String-类似朋友圈的时间格式" class="headerlink" title="3. Date -&gt; String(类似朋友圈的时间格式)"></a>3. Date -&gt; String(类似朋友圈的时间格式)</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TimeTool</span> </span>&#123;</span><br><span class="line">    <span class="comment">/// Date -&gt; String(朋友圈时间显示格式)</span></span><br><span class="line">    <span class="comment">///</span></span><br><span class="line">    <span class="comment">/// - Parameter with: Date</span></span><br><span class="line">    <span class="comment">/// - Returns: String</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">toMsgTime</span>(<span class="params">with</span> <span class="params">date</span>: <span class="type">Date</span>)</span> -&gt; <span class="type">String</span>? &#123;</span><br><span class="line">        <span class="keyword">let</span> sinceDate <span class="operator">=</span> date</span><br><span class="line">        <span class="keyword">let</span> curDate <span class="operator">=</span> <span class="type">Date</span>()</span><br><span class="line">        <span class="keyword">let</span> i: <span class="type">Int</span> <span class="operator">=</span> <span class="type">Int</span>(curDate.timeIntervalSince(sinceDate))</span><br><span class="line"></span><br><span class="line">        <span class="keyword">let</span> minute: <span class="type">Int</span> <span class="operator">=</span> <span class="number">60</span></span><br><span class="line">        <span class="keyword">let</span> hour: <span class="type">Int</span> <span class="operator">=</span> minute <span class="operator">*</span> <span class="number">60</span></span><br><span class="line">        <span class="keyword">let</span> day: <span class="type">Int</span> <span class="operator">=</span> hour <span class="operator">*</span> <span class="number">24</span></span><br><span class="line">        <span class="keyword">let</span> month: <span class="type">Int</span> <span class="operator">=</span> day <span class="operator">*</span> <span class="number">30</span> <span class="comment">// 平均值</span></span><br><span class="line">        <span class="keyword">let</span> year: <span class="type">Int</span> <span class="operator">=</span> month <span class="operator">*</span> <span class="number">12</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> str <span class="operator">=</span> <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">switch</span> i &#123;</span><br><span class="line">        <span class="keyword">case</span> <span class="number">0</span><span class="operator">..&lt;</span>minute:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;刚刚&quot;</span></span><br><span class="line">        <span class="keyword">case</span> minute<span class="operator">..&lt;</span>hour:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(i<span class="operator">/</span>minute)</span> 分钟前&quot;</span></span><br><span class="line">        <span class="keyword">case</span> hour<span class="operator">..&lt;</span>day:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(i<span class="operator">/</span>hour)</span> 小时前&quot;</span></span><br><span class="line">        <span class="keyword">case</span> day<span class="operator">..&lt;</span>month:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(i<span class="operator">/</span>day)</span> 天前&quot;</span></span><br><span class="line">        <span class="keyword">case</span> month<span class="operator">..&lt;</span>year:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(i<span class="operator">/</span>month)</span> 月前&quot;</span></span><br><span class="line">        <span class="keyword">case</span> year<span class="operator">..&lt;</span><span class="type">LONG_MAX</span>:</span><br><span class="line">            str <span class="operator">=</span> <span class="string">&quot;<span class="subst">\(i<span class="operator">/</span>year)</span> 年前&quot;</span></span><br><span class="line">        <span class="keyword">default</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> str</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-Date-gt-String-类似朋友圈的时间格式"><a href="#3-Date-gt-String-类似朋友圈的时间格式" class="headerlink" title="3. Date -&gt; String(类似朋友圈的时间格式)"></a>3. Date -&gt; String(类似朋友圈的时间格式)</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TimeTool</span> </span>&#123;<br>    <span class="hljs-comment">/// Date -&gt; String(朋友圈时间显示格式)</span><br>    <span class="hljs-comment">///</span><br>    <span class="hljs-comment">/// - Parameter with: Date</span><br>    <span class="hljs-comment">/// - Returns: String</span><br>    <span class="hljs-keyword">static</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">toMsgTime</span>(<span class="hljs-params">with</span> <span class="hljs-params">date</span>: <span class="hljs-type">Date</span>)</span> -&gt; <span class="hljs-type">String</span>? &#123;<br>        <span class="hljs-keyword">let</span> sinceDate <span class="hljs-operator">=</span> date<br>        <span class="hljs-keyword">let</span> curDate <span class="hljs-operator">=</span> <span class="hljs-type">Date</span>()<br>        <span class="hljs-keyword">let</span> i: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> <span class="hljs-type">Int</span>(curDate.timeIntervalSince(sinceDate))<br><br>        <span class="hljs-keyword">let</span> minute: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> <span class="hljs-number">60</span><br>        <span class="hljs-keyword">let</span> hour: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> minute <span class="hljs-operator">*</span> <span class="hljs-number">60</span><br>        <span class="hljs-keyword">let</span> day: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> hour <span class="hljs-operator">*</span> <span class="hljs-number">24</span><br>        <span class="hljs-keyword">let</span> month: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> day <span class="hljs-operator">*</span> <span class="hljs-number">30</span> <span class="hljs-comment">// 平均值</span><br>        <span class="hljs-keyword">let</span> year: <span class="hljs-type">Int</span> <span class="hljs-operator">=</span> month <span class="hljs-operator">*</span> <span class="hljs-number">12</span><br><br>        <span class="hljs-keyword">var</span> str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;</span><br>        <span class="hljs-keyword">switch</span> i &#123;<br>        <span class="hljs-keyword">case</span> <span class="hljs-number">0</span><span class="hljs-operator">..&lt;</span>minute:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;刚刚&quot;</span><br>        <span class="hljs-keyword">case</span> minute<span class="hljs-operator">..&lt;</span>hour:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(i<span class="hljs-operator">/</span>minute)</span> 分钟前&quot;</span><br>        <span class="hljs-keyword">case</span> hour<span class="hljs-operator">..&lt;</span>day:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(i<span class="hljs-operator">/</span>hour)</span> 小时前&quot;</span><br>        <span class="hljs-keyword">case</span> day<span class="hljs-operator">..&lt;</span>month:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(i<span class="hljs-operator">/</span>day)</span> 天前&quot;</span><br>        <span class="hljs-keyword">case</span> month<span class="hljs-operator">..&lt;</span>year:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(i<span class="hljs-operator">/</span>month)</span> 月前&quot;</span><br>        <span class="hljs-keyword">case</span> year<span class="hljs-operator">..&lt;</span><span class="hljs-type">LONG_MAX</span>:<br>            str <span class="hljs-operator">=</span> <span class="hljs-string">&quot;<span class="hljs-subst">\(i<span class="hljs-operator">/</span>year)</span> 年前&quot;</span><br>        <span class="hljs-keyword">default</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">nil</span><br>        &#125;<br>        <span class="hljs-keyword">return</span> str<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><a target="_blank" rel="noopener" href="http://www.unicode.org/reports/tr35/tr35-25.html#Date_Format_Patterns">Date Format Patterns支持的格式</a></p>
 
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2019/07/28/swift-compile/" data-toggle="tooltip" data-placement="top"
-                           title="Swift 编译优化">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2019/03/07/swift-build-optimizing/" data-toggle="tooltip" data-placement="top"
-                           title="Swift 编译优化">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
             </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-String-gt-Date"><span class="toc-text">1. String -&gt; Date</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-Date-gt-String"><span class="toc-text">2. Date -&gt; String</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-Date-gt-String-%E7%B1%BB%E4%BC%BC%E6%9C%8B%E5%8F%8B%E5%9C%88%E7%9A%84%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F"><span class="toc-text">3. Date -&gt; String(类似朋友圈的时间格式)</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
                 
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
                 </p>
-
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2019/07/28/swift-compile/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Swift 编译优化</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2019/03/07/swift-build-optimizing/">
+                        <span class="hidden-mobile">Swift 编译优化</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
+
+            
+          </article>
         </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<!-- jQuery -->
 
-<script src="/js/jquery.min.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-</script>
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-<!-- Google Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-<!-- Baidu Tongji -->
+  
 
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','','2.0.0');
-</script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
 </html>

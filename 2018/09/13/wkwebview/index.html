@@ -1,181 +1,246 @@
+
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="" data-default-color-scheme=auto>
 
-<!-- Head tag -->
+
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
-    <link rel="alternate" type="application/atom+xml" title="我心中有猛虎，细嗅蔷薇" href="/atom.xml">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
-    <title>
-        
-        WkWebview与其他组件混排｜undefined
-        
-    </title>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/J.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="我心中有猛虎，细嗅蔷薇">
+  <meta name="author" content="Jemesl Wu">
+  <meta name="keywords" content="">
+  <meta name="description" content="根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。并且需要针对css以及图片懒加载优化。 一、添加css这一点比较简单，webview所显示的内容是通过接口返回获得的字符串。做一个简单的拼接就可以。 12345678910let link &#x3D; &quot;&lt;link rel&#x3D;\&quot;stylesheet\&quot; href&#x3D;\&quot;\(Stri">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WkWebview与其他组件混排">
+<meta property="og:url" content="http://jemesl.github.io/2018/09/13/wkwebview/index.html">
+<meta property="og:site_name" content="Jemesl&#39;s blogs">
+<meta property="og:description" content="根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。并且需要针对css以及图片懒加载优化。 一、添加css这一点比较简单，webview所显示的内容是通过接口返回获得的字符串。做一个简单的拼接就可以。 12345678910let link &#x3D; &quot;&lt;link rel&#x3D;\&quot;stylesheet\&quot; href&#x3D;\&quot;\(Stri">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-09-13T07:47:55.000Z">
+<meta property="article:modified_time" content="2019-10-30T03:02:09.000Z">
+<meta property="article:author" content="Jemesl Wu">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>WkWebview与其他组件混排 - Jemesl&#39;s blogs</title>
 
-    <link rel="canonical" href="http://jemesl.github.io/2018/09/13/wkwebview/">
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
 
-    <!-- Bootstrap Core CSS -->
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
     
-<link rel="stylesheet" href="/css/bootstrap.min.css">
-
-
-    <!-- Custom CSS -->
     
-<link rel="stylesheet" href="/css/blog-style.css">
-
-
-    <!-- Pygments Github CSS -->
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
     
-<link rel="stylesheet" href="/css/syntax.css">
+  
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jemesl.github.io","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname"}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
-<style>
 
-    header.intro-header {
-        background-image: url('')
-    }
-</style>
-<!-- hack iOS CSS :active style -->
-<body ontouchstart="" class="animated fadeIn">
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
-" data-ishome = "false" >
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand animated pulse" href="/">
-                <span class="brand-logo">
-                    我心中有猛虎，细嗅蔷薇
-                </span>
-                's Blog
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Jemesl</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                ホーム
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                アーカイブ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                カテゴリー
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                タグ
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                本ブログ情報　
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
             </a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <!-- Known Issue, found by Hux:
-            <nav>'s height woule be hold on by its content.
-            so, when navbar scale out, the <nav> will cover tags.
-            also mask any touch event of tags, unfortunately.
-        -->
-        <!-- /.navbar-collapse -->
-        <div id="huxblog_navbar">
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-					
-                    
-					
-					
-                </ul>
-            </div>
-        </div>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
     </div>
-    <!-- /.container -->
+  </div>
 </nav>
-<script>
-    // Drop Bootstarp low-performance Navbar
-    // Use customize navbar with high-quality material design animation
-    // in high-perf jank-free CSS3 implementation
-//    var $body   = document.body;
-    var $toggle = document.querySelector('.navbar-toggle');
-    var $navbar = document.querySelector('#huxblog_navbar');
-    var $collapse = document.querySelector('.navbar-collapse');
 
-    $toggle.addEventListener('click', handleMagic)
-    function handleMagic(e){
-        if ($navbar.className.indexOf('in') > 0) {
-        // CLOSE
-            $navbar.className = " ";
-            // wait until animation end.
-            setTimeout(function(){
-                // prevent frequently toggle
-                if($navbar.className.indexOf('in') < 0) {
-                    $collapse.style.height = "0px"
-                }
-            },400)
-        }else{
-        // OPEN
-            $collapse.style.height = "auto"
-            $navbar.className += " in";
-        }
-    }
-</script>
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="WkWebview与其他组件混排">
+              
+            </span>
 
-<!-- Main Content -->
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2018-09-13 15:47" pubdate>
+        September 13, 2018 pm
+      </time>
+    </span>
+  
+</div>
 
-<!--only post-->
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.5k 字
+    </span>
+  
 
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11 分钟
+    </span>
+  
 
-<img class="wechat-title-img"
-     src="">
+  
+  
+</div>
 
+            
+          </div>
 
-<style>
-    
-    header.intro-header {
-        background-image: url('')
-    }
-
-    
-</style>
-
-<header class="intro-header">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <div class="post-heading">
-                    <h1>WkWebview与其他组件混排</h1>
-                    
-                    <span class="meta">
-                         作者 Jemesl Wu
-                        <span>
-                          日期 2018-09-13
-                         </span>
-                    </span>
-                    <div class="tags text-center">
-                        
-                    </div>
-                </div>
-            </div>
+          
         </div>
+      </div>
     </div>
-    <div class="post-title-haojen">
-        <span>
-            WkWebview与其他组件混排
-        </span>
-    </div>
-</header>
+  </header>
 
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-            <!-- Post Container -->
-            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。<br>并且需要针对css以及图片懒加载优化。</p>
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">WkWebview与其他组件混排</h1>
+            
+            <div class="markdown-body">
+              <p>根据项目需求，需要多个webview和自定义的组件根据 API 返回数据动态混排。<br>并且需要针对css以及图片懒加载优化。</p>
 <h3 id="一、添加css"><a href="#一、添加css" class="headerlink" title="一、添加css"></a>一、添加css</h3><p>这一点比较简单，webview所显示的内容是通过接口返回获得的字符串。<br>做一个简单的拼接就可以。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> link <span class="operator">=</span> <span class="string">&quot;&lt;link rel=<span class="subst">\&quot;</span>stylesheet<span class="subst">\&quot;</span> href=<span class="subst">\&quot;</span><span class="subst">\(String(describing: Bundle.main.url(forResource: <span class="string">&quot;RichStyle&quot;</span>, withExtension: <span class="string">&quot;css&quot;</span>)<span class="operator">!</span>))</span><span class="subst">\&quot;</span>&gt;&quot;</span></span><br><span class="line"><span class="keyword">let</span> htmlContent <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">&lt;header&gt;</span></span><br><span class="line"><span class="string">&lt;meta name=&#x27;viewport&#x27; content=&#x27;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&#x27; /&gt;</span></span><br><span class="line"><span class="string"><span class="subst">\(link)</span></span></span><br><span class="line"><span class="string">&lt;/header&gt;</span></span><br><span class="line"><span class="string">&lt;div class=&#x27;richtext-container&#x27;&gt;</span></span><br><span class="line"><span class="string"><span class="subst">\(newContent)</span></span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">let</span> link <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&lt;link rel=<span class="hljs-subst">\&quot;</span>stylesheet<span class="hljs-subst">\&quot;</span> href=<span class="hljs-subst">\&quot;</span><span class="hljs-subst">\(String(describing: Bundle.main.url(forResource: <span class="hljs-string">&quot;RichStyle&quot;</span>, withExtension: <span class="hljs-string">&quot;css&quot;</span>)<span class="hljs-operator">!</span>))</span><span class="hljs-subst">\&quot;</span>&gt;&quot;</span><br><span class="hljs-keyword">let</span> htmlContent <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">&lt;header&gt;</span><br><span class="hljs-string">&lt;meta name=&#x27;viewport&#x27; content=&#x27;width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no&#x27; /&gt;</span><br><span class="hljs-string"><span class="hljs-subst">\(link)</span></span><br><span class="hljs-string">&lt;/header&gt;</span><br><span class="hljs-string">&lt;div class=&#x27;richtext-container&#x27;&gt;</span><br><span class="hljs-string"><span class="hljs-subst">\(newContent)</span></span><br><span class="hljs-string">&lt;/div&gt;</span><br><span class="hljs-string">&quot;&quot;&quot;</span><br></code></pre></td></tr></table></figure>
 <p><strong>newContent</strong> 是内容正文<br><strong>link</strong> 是css样式<br>其中由于显示问题，需要在头部添加 <strong>meta</strong> 这一段。<br>由于css比较多，放在一起不太合适。可以写在另一个文件中，通过 <strong>Bundle</strong> 形式加载。<br>这里有个需要注意的地方，css文件存放的位置。<br>此刻RichStyle.css 存放在/Classes/Utils/ 下。<br>要在加载html 时，指定在 <strong>file:///Classes/Utils/</strong> 目录下。</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">webView.loadHTMLString(htmlContent, baseURL: <span class="type">URL</span>(string: <span class="string">&quot;file:///Classes/Utils/&quot;</span>) )</span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs Swift">webView.loadHTMLString(htmlContent, baseURL: <span class="hljs-type">URL</span>(string: <span class="hljs-string">&quot;file:///Classes/Utils/&quot;</span>) )<br></code></pre></td></tr></table></figure>
 
 <h3 id="二、图片懒加载"><a href="#二、图片懒加载" class="headerlink" title="二、图片懒加载"></a>二、图片懒加载</h3><p>如果是单个webview，且视窗大小固定。可以使用 <strong>lazysizes</strong>，纯js原生，不依赖任何其他库。<br><strong>lazysizes</strong> 的逻辑是webview 视窗之外的图片懒加载，滑动到视窗的img 才会加载。<br>但项目中是多个webview 及其他组件 全展开显示在scrollview里面。<br>webview 视窗高度根据内容高度来的。导致 <strong>lazysizes</strong>依旧还是在加载同时把所有页面图片加载完，不过加载图片是在 <strong>didFinish</strong>之后。</p>
 <p>目前的解决办法就是：</p>
@@ -187,178 +252,199 @@
 <li>然后判断修改img的src 加载图片。</li>
 <li>还有点就是要刷新webview的高度, 可以在加载图片后 js 调swift 刷新高度，或者弄个定时器执行js脚本刷新高度</li>
 </ul>
-<h5 id="一、停止滚动触发监测加载图片的方法"><a href="#一、停止滚动触发监测加载图片的方法" class="headerlink" title="一、停止滚动触发监测加载图片的方法"></a>一、停止滚动触发监测加载图片的方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndDragging</span>(<span class="keyword">_</span> <span class="params">scrollView</span>: <span class="type">UIScrollView</span>, <span class="params">willDecelerate</span> <span class="params">decelerate</span>: <span class="type">Bool</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="operator">!</span>decelerate &#123;</span><br><span class="line">        <span class="keyword">let</span> dragTpDragStop <span class="operator">=</span> scrollView.isTracking <span class="operator">&amp;&amp;</span> <span class="operator">!</span>scrollView.isDragging <span class="operator">&amp;&amp;</span> <span class="operator">!</span>scrollView.isDecelerating</span><br><span class="line">        <span class="keyword">if</span> dragTpDragStop &#123;</span><br><span class="line">            scrollViewDidEndScroll()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndDecelerating</span>(<span class="keyword">_</span> <span class="params">scrollView</span>: <span class="type">UIScrollView</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> scrollToScrollStop <span class="operator">=</span> <span class="operator">!</span>scrollView.isTracking <span class="operator">&amp;&amp;</span> <span class="operator">!</span>scrollView.isDragging <span class="operator">&amp;&amp;</span> <span class="operator">!</span>scrollView.isDecelerating</span><br><span class="line">    <span class="keyword">if</span> scrollToScrollStop &#123;</span><br><span class="line">        scrollViewDidEndScroll()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">scrollViewDidEndScroll</span>()</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> scrollOffset <span class="operator">=</span> scrollView.contentOffset.y</span><br><span class="line">    <span class="keyword">for</span> rh <span class="keyword">in</span> allRichText.enumerated() &#123;<span class="comment">// rh 是一个包含 webview属性的组件</span></span><br><span class="line">        rh.element.loadImgsScript(offset:scrollOffset, wkTop: rh.element.frame.minY)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h5 id="二、执行每个webview的JS脚本"><a href="#二、执行每个webview的JS脚本" class="headerlink" title="二、执行每个webview的JS脚本"></a>二、执行每个webview的JS脚本</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">loadImgsScript</span>(<span class="params">offset</span>: <span class="type">CGFloat</span>, <span class="params">wkTop</span>: <span class="type">CGFloat</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> minOffset <span class="operator">=</span> offset</span><br><span class="line">    <span class="keyword">let</span> maxOffset <span class="operator">=</span> offset <span class="operator">+</span> bmy_screenHeight</span><br><span class="line">    <span class="keyword">let</span> script <span class="operator">=</span> <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        var imgs = document.getElementsByTagName(&#x27;img&#x27;);</span></span><br><span class="line"><span class="string">        var minOffset = <span class="subst">\(minOffset)</span></span></span><br><span class="line"><span class="string">        var maxOffset = <span class="subst">\(maxOffset)</span></span></span><br><span class="line"><span class="string">        var wkTop = <span class="subst">\(wkTop)</span></span></span><br><span class="line"><span class="string">        function lazyload()&#123;</span></span><br><span class="line"><span class="string">            for(var i=0; i&lt;imgs.length; i++) &#123;</span></span><br><span class="line"><span class="string">                var img = imgs[i]</span></span><br><span class="line"><span class="string">                var top = img.offsetTop + wkTop</span></span><br><span class="line"><span class="string">                var isDisplay = false</span></span><br><span class="line"><span class="string">                if((top &gt; minOffset - 300) &amp;&amp; top &lt; maxOffset + 300) &#123;</span></span><br><span class="line"><span class="string">                    isDisplay = true</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">                if(isDisplay)&#123;</span></span><br><span class="line"><span class="string">                    img.src = img.getAttribute(&#x27;data-src&#x27;);</span></span><br><span class="line"><span class="string">                    img.setAttribute(&#x27;class&#x27;,&#x27;lazyloaded&#x27;);</span></span><br><span class="line"><span class="string">                &#125;</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">        lazyload()</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    webView.evaluateJavaScript(script) &#123; (res, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> e <span class="operator">=</span> error &#123;</span><br><span class="line">            <span class="built_in">print</span>(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="一、停止滚动触发监测加载图片的方法"><a href="#一、停止滚动触发监测加载图片的方法" class="headerlink" title="一、停止滚动触发监测加载图片的方法"></a>一、停止滚动触发监测加载图片的方法</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">scrollViewDidEndDragging</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">scrollView</span>: <span class="hljs-type">UIScrollView</span>, <span class="hljs-params">willDecelerate</span> <span class="hljs-params">decelerate</span>: <span class="hljs-type">Bool</span>)</span> &#123;<br>    <span class="hljs-keyword">if</span> <span class="hljs-operator">!</span>decelerate &#123;<br>        <span class="hljs-keyword">let</span> dragTpDragStop <span class="hljs-operator">=</span> scrollView.isTracking <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-operator">!</span>scrollView.isDragging <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-operator">!</span>scrollView.isDecelerating<br>        <span class="hljs-keyword">if</span> dragTpDragStop &#123;<br>            scrollViewDidEndScroll()<br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">scrollViewDidEndDecelerating</span>(<span class="hljs-keyword">_</span> <span class="hljs-params">scrollView</span>: <span class="hljs-type">UIScrollView</span>)</span> &#123;<br>    <span class="hljs-keyword">let</span> scrollToScrollStop <span class="hljs-operator">=</span> <span class="hljs-operator">!</span>scrollView.isTracking <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-operator">!</span>scrollView.isDragging <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-operator">!</span>scrollView.isDecelerating<br>    <span class="hljs-keyword">if</span> scrollToScrollStop &#123;<br>        scrollViewDidEndScroll()<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">scrollViewDidEndScroll</span>()</span> &#123;<br>    <span class="hljs-keyword">let</span> scrollOffset <span class="hljs-operator">=</span> scrollView.contentOffset.y<br>    <span class="hljs-keyword">for</span> rh <span class="hljs-keyword">in</span> allRichText.enumerated() &#123;<span class="hljs-comment">// rh 是一个包含 webview属性的组件</span><br>        rh.element.loadImgsScript(offset:scrollOffset, wkTop: rh.element.frame.minY)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h5 id="二、执行每个webview的JS脚本"><a href="#二、执行每个webview的JS脚本" class="headerlink" title="二、执行每个webview的JS脚本"></a>二、执行每个webview的JS脚本</h5><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">loadImgsScript</span>(<span class="hljs-params">offset</span>: <span class="hljs-type">CGFloat</span>, <span class="hljs-params">wkTop</span>: <span class="hljs-type">CGFloat</span>)</span> &#123;<br>    <span class="hljs-keyword">let</span> minOffset <span class="hljs-operator">=</span> offset<br>    <span class="hljs-keyword">let</span> maxOffset <span class="hljs-operator">=</span> offset <span class="hljs-operator">+</span> bmy_screenHeight<br>    <span class="hljs-keyword">let</span> script <span class="hljs-operator">=</span> <span class="hljs-string">&quot;&quot;&quot;</span><br><span class="hljs-string">        var imgs = document.getElementsByTagName(&#x27;img&#x27;);</span><br><span class="hljs-string">        var minOffset = <span class="hljs-subst">\(minOffset)</span></span><br><span class="hljs-string">        var maxOffset = <span class="hljs-subst">\(maxOffset)</span></span><br><span class="hljs-string">        var wkTop = <span class="hljs-subst">\(wkTop)</span></span><br><span class="hljs-string">        function lazyload()&#123;</span><br><span class="hljs-string">            for(var i=0; i&lt;imgs.length; i++) &#123;</span><br><span class="hljs-string">                var img = imgs[i]</span><br><span class="hljs-string">                var top = img.offsetTop + wkTop</span><br><span class="hljs-string">                var isDisplay = false</span><br><span class="hljs-string">                if((top &gt; minOffset - 300) &amp;&amp; top &lt; maxOffset + 300) &#123;</span><br><span class="hljs-string">                    isDisplay = true</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">                if(isDisplay)&#123;</span><br><span class="hljs-string">                    img.src = img.getAttribute(&#x27;data-src&#x27;);</span><br><span class="hljs-string">                    img.setAttribute(&#x27;class&#x27;,&#x27;lazyloaded&#x27;);</span><br><span class="hljs-string">                &#125;</span><br><span class="hljs-string">            &#125;</span><br><span class="hljs-string">        &#125;</span><br><span class="hljs-string">        lazyload()</span><br><span class="hljs-string">    &quot;&quot;&quot;</span><br>    webView.evaluateJavaScript(script) &#123; (res, error) <span class="hljs-keyword">in</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">let</span> e <span class="hljs-operator">=</span> error &#123;<br>            <span class="hljs-built_in">print</span>(error)<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-<h3 id="刷新webview-的高度"><a href="#刷新webview-的高度" class="headerlink" title="刷新webview 的高度"></a>刷新webview 的高度</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">reloadWebviewHeight</span>()</span> &#123;</span><br><span class="line">    webView.evaluateJavaScript(<span class="string">&quot;document.body.scrollHeight&quot;</span>) &#123; (value, error) <span class="keyword">in</span></span><br><span class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> safeValue <span class="operator">=</span> value <span class="keyword">else</span> &#123; <span class="keyword">return</span> &#125;</span><br><span class="line">        <span class="keyword">let</span> height <span class="operator">=</span> <span class="type">CGFloat</span>(safeValue <span class="keyword">as!</span> <span class="type">CGFloat</span>)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> height <span class="operator">&gt;</span> <span class="keyword">self</span>.contentHeight &#123;</span><br><span class="line">            <span class="keyword">self</span>.contentHeight <span class="operator">=</span> height</span><br><span class="line">            <span class="keyword">self</span>.webView.snp.updateConstraints(&#123; (make) <span class="keyword">in</span></span><br><span class="line">                make.height.equalTo(height)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-                <hr>
-                
-
-                <ul class="pager">
-                    
-                    <li class="previous">
-                        <a href="/2018/09/14/rxswift/" data-toggle="tooltip" data-placement="top"
-                           title="RXSwift">&larr; Previous Post</a>
-                    </li>
-                    
-                    
-                    <li class="next">
-                        <a href="/2018/09/13/wkwebview-js/" data-toggle="tooltip" data-placement="top"
-                           title="WkWebview 与 js 交互">Next Post &rarr;</a>
-                    </li>
-                    
-                </ul>
-
-                
-
-                
-
-
-                <!--加入新的评论系统-->
-                
-
-                
-
+<h3 id="刷新webview-的高度"><a href="#刷新webview-的高度" class="headerlink" title="刷新webview 的高度"></a>刷新webview 的高度</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs Swift"><span class="hljs-keyword">@objc</span> <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">reloadWebviewHeight</span>()</span> &#123;<br>    webView.evaluateJavaScript(<span class="hljs-string">&quot;document.body.scrollHeight&quot;</span>) &#123; (value, error) <span class="hljs-keyword">in</span><br>        <span class="hljs-keyword">guard</span> <span class="hljs-keyword">let</span> safeValue <span class="hljs-operator">=</span> value <span class="hljs-keyword">else</span> &#123; <span class="hljs-keyword">return</span> &#125;<br>        <span class="hljs-keyword">let</span> height <span class="hljs-operator">=</span> <span class="hljs-type">CGFloat</span>(safeValue <span class="hljs-keyword">as!</span> <span class="hljs-type">CGFloat</span>)<br><br>        <span class="hljs-keyword">if</span> height <span class="hljs-operator">&gt;</span> <span class="hljs-keyword">self</span>.contentHeight &#123;<br>            <span class="hljs-keyword">self</span>.contentHeight <span class="hljs-operator">=</span> height<br>            <span class="hljs-keyword">self</span>.webView.snp.updateConstraints(&#123; (make) <span class="hljs-keyword">in</span><br>                make.height.equalTo(height)<br>            &#125;)<br>        &#125;<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
             </div>
-
-            <div class="hidden-xs col-sm-3 toc-col">
-                <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B7%BB%E5%8A%A0css"><span class="toc-text">一、添加css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%9B%BE%E7%89%87%E6%87%92%E5%8A%A0%E8%BD%BD"><span class="toc-text">二、图片懒加载</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%81%9C%E6%AD%A2%E6%BB%9A%E5%8A%A8%E8%A7%A6%E5%8F%91%E7%9B%91%E6%B5%8B%E5%8A%A0%E8%BD%BD%E5%9B%BE%E7%89%87%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-text">一、停止滚动触发监测加载图片的方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%89%A7%E8%A1%8C%E6%AF%8F%E4%B8%AAwebview%E7%9A%84JS%E8%84%9A%E6%9C%AC"><span class="toc-text">二、执行每个webview的JS脚本</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B7%E6%96%B0webview-%E7%9A%84%E9%AB%98%E5%BA%A6"><span class="toc-text">刷新webview 的高度</span></a></li></ol>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- Sidebar Container -->
-
-            <div class="
-                col-lg-8 col-lg-offset-2
-                col-md-10 col-md-offset-1
-                sidebar-container">
-
-                <!-- Featured Tags -->
-                
-
-                <!-- Friends Blog -->
-                
-            </div>
-        </div>
-
-    </div>
-</article>
-
-
-
-
-
-
-
-<!-- Footer -->
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
-                <br>
-                <ul class="list-inline text-center">
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
                 
                 
-                
-
-                
-
-                
-
-                
-
-                
-
-                </ul>
-                <p class="copyright text-muted">
-                    Copyright &copy; 我心中有猛虎，细嗅蔷薇 2021
-                    <br>
-                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
-                    <br>
-                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
                 </p>
-
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2018/09/14/rxswift/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">RXSwift</span>
+                        <span class="visible-mobile">前の記事</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2018/09/13/wkwebview-js/">
+                        <span class="hidden-mobile">WkWebview 与 js 交互</span>
+                        <span class="visible-mobile">次の記事</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
             </div>
+
+            
+          </article>
         </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;ディレクトリ</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">検索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">キーワード</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
 </footer>
 
-<!-- jQuery -->
 
-<script src="/js/jquery.min.js"></script>
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
 
-
-<!-- Bootstrap Core JavaScript -->
-
-<script src="/js/bootstrap.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-
-<script src="/js/blog.js"></script>
-
-
-<!-- async load function -->
-<script>
-    function async(u, c) {
-      var d = document, t = 'script',
-          o = d.createElement(t),
-          s = d.getElementsByTagName(t)[0];
-      o.src = u;
-      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-      s.parentNode.insertBefore(o, s);
-    }
-</script>
-
-<!-- jquery.tagcloud.js -->
-<script>
-    // only load tagcloud.js in tag.html
-    if($('#tag_cloud').length !== 0){
-        async("http://jemesl.github.io/js/jquery.tagcloud.js",function(){
-            $.fn.tagcloud.defaults = {
-                //size: {start: 1, end: 1, unit: 'em'},
-                color: {start: '#bbbbee', end: '#0085a1'},
-            };
-            $('#tag_cloud a').tagcloud();
-        })
-    }
-</script>
-
-<!--fastClick.js -->
-<script>
-    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
-        var $nav = document.querySelector("nav");
-        if($nav) FastClick.attach($nav);
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
     })
-</script>
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
 
 
 
-<!-- Google Analytics -->
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
 
 
 
-<!-- Baidu Tongji -->
+  
 
 
-<!-- swiftype -->
-<script type="text/javascript">
-  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
-  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
-  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
-  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
 
-  _st('install','','2.0.0');
-</script>
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
 
-<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<!--wechat title img-->
-<img class="wechat-title-img" src="">
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
 </body>
-
 </html>
