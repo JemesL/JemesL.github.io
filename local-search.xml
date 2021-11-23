@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title>Apple silicon 下 nvm 安装不同架构的 node</title>
+    <link href="/2021/11/23/nvm-node/"/>
+    <url>/2021/11/23/nvm-node/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>起初发现在两台<code>M1</code>设备下，通过<code>nvm</code>安装的<code>node</code>一个是<code>arm64</code>， 一个是<code>x64</code>架构的。<br>好奇为何装的不一样</p></blockquote><h2 id="Tips"><a href="#Tips" class="headerlink" title="Tips"></a>Tips</h2><ol><li><code>nvm</code>是判断当前<code>arch</code>来判断是下载<code>arm64</code>还是<code>x64</code>的，可以在终端查看当前的 <code>arch</code>。</li><li><code>Apple silicon</code>对 <code>x64</code>是使用<code>rosetta2</code>来运行的，效率低了些。</li><li>而且<code>node</code>官网也没有对应的<code>arm64</code>版对应的二进制，所以当<code>nvm</code>下载<code>arm64</code>版本<code>node</code>时，会下载源码，再去编译成<code>arm64</code>版。</li><li> 判断找到对应<code>node</code>可执行文件，通过<code>file</code>查看其是什么架构。</li></ol><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">// 查看当前架构<br>$ arch<br>arm64<br>$ arch<br>i386<br><br>// 切换至 x64<br>arch -x86_64 zsh<br>// 切换至 arm64<br>arch -arm64 zsh<br><br>// cd 到对应 <span class="hljs-keyword">node</span> <span class="hljs-title">可执行文件目录下</span><br><span class="hljs-title">$</span> cd ~/.nvm/versions/<span class="hljs-keyword">node</span><span class="hljs-title">/vXX</span>.X.X/bin<br>// <span class="hljs-keyword">node</span> <span class="hljs-title">可执行文件的架构</span><br><span class="hljs-title">$</span> file <span class="hljs-keyword">node</span><br>node:<span class="hljs-title"> Mach-O</span> <span class="hljs-number">64</span>-bit executable x86_64<br>$ file <span class="hljs-keyword">node</span><br>node:<span class="hljs-title"> Mach-O</span> <span class="hljs-number">64</span>-bit executable arm64<br></code></pre></td></tr></table></figure>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>迁移语雀文章图片访问403</title>
     <link href="/2021/11/15/yuque-markdown/"/>
     <url>/2021/11/15/yuque-markdown/</url>
